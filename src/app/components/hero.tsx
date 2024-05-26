@@ -1,9 +1,9 @@
 export default function Hero() {
   return (
     <div
-      className="text-xl leading-none relative pb-32 flex flex-col justify-end"
+      className="text-3xl leading-none relative pb-32 flex flex-col justify-end"
       style={{
-        height: `calc(100vh - 240px)`,
+        height: `calc(100vh - 360px)`,
         minHeight: '320px',
       }}
     >

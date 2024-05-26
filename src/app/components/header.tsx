@@ -19,12 +19,13 @@ function AEYAnim({
   progress: MotionValue<number>
   isFirst?: boolean
 }) {
+  const thing = 0.4
   const progress = useTransform(rawProgress, [0.1, 1], [0, 1])
   const nameAStyle = {
-    opacity: useTransform(progress, [0, 1], [1, 0]),
+    opacity: useTransform(progress, [0, 1 - thing], [1, 0]),
     transform: useMotionTemplate`translateY(${useTransform(
       progress,
-      [0, 1],
+      [0, 1 - thing],
       [0, -0.4]
     )}em)`,
   }
@@ -32,12 +33,12 @@ function AEYAnim({
     width: useTransform(
       progress,
       [0, 1],
-      isFirst ? ['1.18em', '2.22em'] : ['0.96em', '2.3em']
+      isFirst ? ['1.17em', '2.22em'] : ['0.96em', '2.3em']
     ),
-    opacity: useTransform(progress, [0, 1], [0, 1]),
+    opacity: useTransform(progress, [thing, 1], [0, 1]),
     transform: useMotionTemplate`translateY(${useTransform(
       progress,
-      [0, 1],
+      [thing, 1],
       [0.4, 0]
     )}em)`,
   }
@@ -68,9 +69,9 @@ function HeaderAccent({ progress }: { progress: MotionValue<number> }) {
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 10 }}
-        d={`M10 ${height} L${height} 10 H10000`}
+        d={`M10,${height} L${height},10 H10000`}
         stroke={accentLine}
-        strokeWidth={2}
+        strokeWidth={1}
         fill="transparent"
       />
     </motion.svg>
@@ -118,7 +119,13 @@ export default function Header() {
   }
 
   return (
-    <div className="pt-24 pb-40 relative" ref={ref}>
+    <div className="pt-24 pb-72 relative" ref={ref}>
+      <motion.div
+        className="bg-dark fixed top-0 border-l-[1px] border-l-dark -z-10"
+        transition={{ duration: 1.4 }}
+        initial={{ height: 0 }}
+        animate={{ height: `100vh` }}
+      />
       <motion.header
         className="fixed w-full max-w-7xl z-20"
         style={headerStyle}
@@ -152,7 +159,7 @@ export default function Header() {
             <NavLink href="/github">GitHub</NavLink>
             <NavLink href="/contact">Contact</NavLink>
           </nav>
-          <div className="bg-dark absolute right-0 h-screen w-0.5 -z-10 translate-x-0.5" />
+          <div className="bg-dark absolute right-0 h-screen border-r-[1px] border-r-dark -z-10" />
         </div>
         <motion.h3 style={nutalapatiStyle} className="text-2xl">
           Software Developer & Designer

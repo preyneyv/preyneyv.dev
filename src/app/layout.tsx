@@ -35,7 +35,9 @@ export default function RootLayout({
           'font-space-grotesk relative'
         )}
       >
-        <LiiinesContainer>{children}</LiiinesContainer>
+        <div className="overflow-x-hidden w-screen">
+          <LiiinesContainer>{children}</LiiinesContainer>
+        </div>
       </body>
     </html>
   )

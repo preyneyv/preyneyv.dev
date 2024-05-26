@@ -2,6 +2,8 @@
 
 import { AnimateHeight } from '@/components/animate-height'
 import SectionTitle from '@/components/section-title'
+import IconButton from '@/ui/icon-button'
+import { ChevronLeft, ChevronRight } from '@carbon/icons-react'
 import clsx from 'clsx'
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
@@ -61,17 +63,33 @@ export default function Experience() {
         <SectionTitle>Experience</SectionTitle>
         <Selector index={index} setIndex={setIndex} />
         <AnimateHeight>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.h3
-              key={index}
-              initial={{ opacity: 0, translateY: '-0.2em' }}
-              animate={{ opacity: 1, translateY: '0em' }}
-              exit={{ opacity: 0, translateY: '0.2em' }}
-              className="text-2xl leading-none"
-            >
-              {active.role}
-            </motion.h3>
-          </AnimatePresence>
+          <div className="flex justify-between">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.h3
+                key={index}
+                initial={{ opacity: 0, translateY: '-0.2em' }}
+                animate={{ opacity: 1, translateY: '0em' }}
+                exit={{ opacity: 0, translateY: '0.2em' }}
+                className="text-2xl leading-none"
+              >
+                {active.role}
+              </motion.h3>
+            </AnimatePresence>
+            <div className="flex">
+              <IconButton
+                disabled={index === 0}
+                onClick={() => setIndex(Math.max(0, index - 1))}
+              >
+                <ChevronLeft size={24} />
+              </IconButton>
+              <IconButton
+                disabled={index === data.length - 1}
+                onClick={() => setIndex(Math.min(data.length - 1, index + 1))}
+              >
+                <ChevronRight size={24} />
+              </IconButton>
+            </div>
+          </div>
           <AnimatePresence mode="wait" initial={false}>
             <motion.h3
               key={index}
