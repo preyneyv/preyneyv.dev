@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Yarralytics",
+    "slug": "yarralytics",
+    "description": "In-depth performance analytics for Brawlhalla.",
+    "tech": ["Next.js", "Rust", "Azure"]
+  },
+  {
+    "name": "Telestrator",
+    "slug": "telestrator",
+    "description": "Freehand illustration tool for sports/esports analysts.",
+    "tech": ["Rust", "WebRTC", "NVENC"]
+  },
+  {
+    "name": "Yarralytics",
+    "slug": "yarralytics1",
+    "description": "In-depth performance analytics for Brawlhalla.",
+    "tech": ["Next.js", "Rust", "Azure"]
+  }
+]
