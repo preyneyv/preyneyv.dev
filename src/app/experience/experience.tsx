@@ -5,7 +5,12 @@ import SectionTitle from '@/components/section-title'
 import IconButton from '@/ui/icon-button'
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react'
 import clsx from 'clsx'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import {
+  AnimatePresence,
+  MotionConfig,
+  motion,
+  useAnimationControls,
+} from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import data from './data.json'
 
@@ -16,27 +21,54 @@ function Selector({
   index: number
   setIndex: (index: number) => void
 }) {
-  const [offset, setOffset] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
-  const opt = ref.current?.children[index] as HTMLHeadingElement
-  useEffect(() => setOffset(opt?.offsetLeft ?? 0), [opt])
+  const animationControls = useAnimationControls()
+  const lastIdx = useRef(index)
+  useEffect(() => {
+    if (lastIdx.current === index) {
+      return
+    }
+    const offset =
+      (ref.current?.children[index] as HTMLElement)?.offsetLeft ?? 0
+    animationControls.start({
+      x: -offset,
+    })
+    lastIdx.current = index
+  }, [index, ref])
+
   return (
-    <div
+    <motion.div
       ref={ref}
-      className="flex gap-4 font-syne uppercase text-4xl font-extrabold whitespace-nowrap leading-none relative transition-transform duration-700"
-      style={{ transform: `translateX(${-offset}px)` }}
+      drag="x"
+      animate={animationControls}
+      transition={{ duration: 0.8, ease: 'circOut' }}
+      className="flex gap-4 font-syne uppercase text-4xl font-extrabold whitespace-nowrap leading-none relative select-none"
+      dragTransition={{
+        power: 0.4,
+        timeConstant: 150,
+        modifyTarget(value) {
+          const children = Array.from(
+            (ref.current?.children ?? []) as HTMLElement[]
+          )
+          let idx = children.findLastIndex((el) => el.offsetLeft < -value)
+          idx = idx === -1 ? 0 : idx
+          lastIdx.current = idx
+          setIndex(idx)
+          return -children[idx].offsetLeft
+        },
+      }}
     >
       {data.map((exp, i) => {
         const isActive = i === index
         return (
           <h2
             key={i}
-            onClick={(e) => {
+            onClick={() => {
               if (isActive) return
               setIndex(i)
             }}
             className={clsx(
-              'transition-all duration-300 font-[770]',
+              'transition-all duration-300 font-[800] relative active:cursor-grabbing',
               isActive && 'text-white',
               !isActive && 'text-dark hover:text-grae cursor-pointer'
             )}
@@ -45,7 +77,7 @@ function Selector({
           </h2>
         )
       })}
-    </div>
+    </motion.div>
   )
 }
 

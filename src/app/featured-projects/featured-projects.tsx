@@ -1,11 +1,10 @@
 'use client'
 
 import SectionTitle from '@/components/section-title'
-import Link from 'next/link'
-import data from './data.json'
 import { accentLine } from '@/constants'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import Link from 'next/link'
+import data from './data.json'
 
 type Datum = (typeof data)[number]
 
@@ -35,7 +34,6 @@ function StarburstSVG() {
             hover: { pathLength: 1 },
           }}
         />
-        {/* <motion.path d={`M0,0 L0,${-h}`} {...pathProps} /> */}
         <motion.path
           d={`M0,0 L10000,10000`}
           {...pathProps}
@@ -75,20 +73,20 @@ function Project({
                 },
               },
             }}
-            className="absolute border-r-[1px] border-l-[1px] border-dark left-0 w-full -top-[1em]"
+            className="absolute border-l-[1px] border-dark left-0 w-full -top-[1em]"
           />
-          {/* <motion.div
+          <motion.div
             variants={{
               initial: { width: 0 },
               hover: {
-                width: `calc(100% + 2em)`,
+                width: `calc(100% + 1em)`,
                 transition: {
-                  delay: 0.4,
+                  delay: 0.5,
                 },
               },
             }}
             className="absolute border-b-[1px] border-dark -left-[1em] bottom-0"
-          /> */}
+          />
 
           <p className="text-lg leading-tight">{project.description}</p>
           <div className="flex-1" />
