@@ -15,7 +15,7 @@ import {
 } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ReactNode, useRef } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 
 function AEYAnim({
   progress: rawProgress,
@@ -28,14 +28,14 @@ function AEYAnim({
   const animDirection = useRef(0)
 
   useMotionValueEvent(rawProgress, 'change', (v) => {
-    if (v < 0.5) {
+    if (v === 0) {
       if (animDirection.current !== -1) {
         animate(progress, 0, { velocity: 0.3, ease: 'circInOut' })
         animDirection.current = -1
       }
     } else {
       if (animDirection.current !== 1) {
-        animate(progress, 1, { velocity: 0.3, ease: 'circInOut' })
+        animate(progress, 1, { velocity: 0.3, ease: 'circInOut', delay: 0.3 })
         animDirection.current = 1
       }
     }
@@ -155,10 +155,29 @@ function NavLink({
 
 export default function Header() {
   const ref = useRef(null)
-  let { scrollYProgress: progress } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   })
+
+  // const isLandingPage = usePathname() === '/'
+  // const progress = useMotionValue(0)
+  // useEffect(() => {
+  //   const animProperties = {
+  //     duration: 0.5,
+  //   }
+  //   if (isLandingPage) {
+  //     animate(progress, scrollYProgress.get(), animProperties)
+  //     return scrollYProgress.on('change', (value) => {
+  //       progress.animation?.complete()
+  //       progress.set(value)
+  //     })
+  //   } else {
+  //     animate(progress, 1, animProperties)
+  //   }
+  // }, [isLandingPage, scrollYProgress])
+  const progress = scrollYProgress
+
   const midpoint = 0.5
   const p1 = useTransform(
     useTransform(progress, [0, midpoint], [0, 1]),
@@ -195,7 +214,7 @@ export default function Header() {
           animate={{ height: `100vh` }}
         />
         <motion.header
-          className="fixed w-screen z-20 bg-gradient-to-b from-black/70 to-transparent left-0 top-0 pt-24 flex justify-center"
+          className="fixed w-screen z-20 bg-gradient-to-b from-black to-transparent left-0 top-0 pt-24 flex justify-center"
           style={headerStyle}
         >
           <motion.div className="w-full max-w-7xl">
