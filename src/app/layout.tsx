@@ -1,8 +1,9 @@
+import { MotionPageTransition } from '@/components/custom-motion'
+import Header from '@/components/header'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
 import './globals.css'
-import { LiiinesContainer } from '@/components/liiines'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -35,8 +36,13 @@ export default function RootLayout({
           'font-space-grotesk relative'
         )}
       >
-        <div className="overflow-x-hidden w-screen">
-          <LiiinesContainer>{children}</LiiinesContainer>
+        <div className="w-screen overflow-x-hidden">
+          <main className="flex min-h-screen flex-col items-center justify-between w-screen">
+            <div className="w-screen max-w-7xl">
+              <Header key="header" />
+              <MotionPageTransition>{children}</MotionPageTransition>
+            </div>
+          </main>
         </div>
       </body>
     </html>

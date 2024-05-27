@@ -1,6 +1,6 @@
 'use client'
 
-import { accentLine } from '@/constants'
+import { colors } from '@/constants'
 import {
   ReactNode,
   createContext,
@@ -54,7 +54,7 @@ export function LiiinesContainer({ children }: { children?: ReactNode }) {
         {Object.values(lines).map(([_, line]) => (
           <path
             d={line.render()}
-            stroke={accentLine}
+            stroke={colors.dark}
             strokeWidth={2}
             fill="transparent"
           />

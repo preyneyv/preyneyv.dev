@@ -12,7 +12,8 @@ import {
   useAnimationControls,
 } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import data from './data.json'
+
+import data from '@/data/experience'
 
 function Selector({
   index,
@@ -44,7 +45,6 @@ function Selector({
       transition={{ duration: 0.8, ease: 'circOut' }}
       className="flex gap-4 font-syne uppercase text-4xl font-extrabold whitespace-nowrap leading-none relative select-none"
       dragTransition={{
-        power: 0.4,
         timeConstant: 150,
         modifyTarget(value) {
           const children = Array.from(
@@ -91,7 +91,7 @@ export default function Experience() {
         ease: 'easeInOut',
       }}
     >
-      <section className="mb-24">
+      <section>
         <SectionTitle>Experience</SectionTitle>
         <Selector index={index} setIndex={setIndex} />
         <AnimateHeight>
@@ -107,7 +107,7 @@ export default function Experience() {
                 {active.role}
               </motion.h3>
             </AnimatePresence>
-            <div className="flex">
+            <div className="flex pr-2">
               <IconButton
                 disabled={index === 0}
                 onClick={() => setIndex(Math.max(0, index - 1))}

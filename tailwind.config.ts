@@ -1,18 +1,12 @@
-import { accentLine } from './src/constants'
 import type { Config } from 'tailwindcss'
+import { colors } from './src/constants'
 
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        bloo: '#3399D8',
-        grae: '#424242',
-        dark: accentLine,
+        ...colors,
       },
       fontFamily: {
         'space-grotesk': 'var(--font-space-grotesk), sans-serif',
