@@ -31,12 +31,12 @@ export default [
     tech: ['JavaScript', 'HTMX', 'Service Workers'],
     links: [
       {
-        type: 'github',
-        url: 'https://github.com/preyneyv/htmx-serviceworker-todo',
-      },
-      {
         type: 'external',
         url: 'https://htmx-serviceworker-todo.vercel.app/',
+      },
+      {
+        type: 'github',
+        url: 'https://github.com/preyneyv/htmx-serviceworker-todo',
       },
     ],
   },

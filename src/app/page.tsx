@@ -3,6 +3,9 @@ import { MotionConfig } from 'framer-motion'
 import Hero from './_components/hero'
 import Experience from './_sections/experience'
 import FeaturedProjects from './_sections/featured-projects'
+import Education from './_sections/education'
+import About from './_sections/about'
+import Certifications from './_sections/certifications'
 
 export default function Home() {
   return (
@@ -16,6 +19,17 @@ export default function Home() {
       <FeaturedProjects />
       <div className="mb-24" />
       <Experience />
+      <div className="mb-24" />
+      <div className="grid grid-cols-[3fr_3fr] gap-16">
+        <div>
+          <About />
+        </div>
+        <div>
+          <Education />
+          <div className="mb-8" />
+          <Certifications />
+        </div>
+      </div>
 
       <div className="max-w-5xl opacity-15 mt-16">
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing

@@ -221,7 +221,7 @@ export default function Header() {
             <div className="flex justify-between w-full relative">
               <div className="relative select-none">
                 <motion.h1
-                  className="font-syne font-extrabold uppercase leading-[0.76] "
+                  className="font-syne font-extrabold uppercase leading-[0.76]"
                   style={h1Style}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

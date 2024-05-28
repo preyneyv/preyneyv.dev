@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimateHeight } from '@/components/animate-height'
-import { MotionImage } from '@/components/custom-motion'
+import { MotionImage, useIsInitialRender } from '@/components/custom-motion'
 import { Project } from '@/data/projects'
 import {
   AnimatePresence,
@@ -68,6 +68,7 @@ function PreviewImage({
   project: Project | null
   x: MotionValue<number>
 }) {
+  const isInitial = useIsInitialRender()
   const y = useMotionValue(0)
   useEffect(() => {
     const listener = (e: MouseEvent) => {
@@ -81,7 +82,7 @@ function PreviewImage({
   const springY = useSpring(y, {
     bounce: 0,
   })
-  const motionTranslate = useMotionTemplate`translate(${x}px, ${springY}px) translate(-100%, -50%) translate(-60px, 0)`
+  const motionTranslate = useMotionTemplate`translate(${x}px, ${springY}px) translate(-100%, -50%) translate(-44px, 0)`
 
   const lastProject = useRef(rawProject)
   const [haveImage, setHaveImage] = useState(!!rawProject?.previewImage)
@@ -107,86 +108,96 @@ function PreviewImage({
   return createPortal(
     <MotionConfig transition={{ type: 'tween' }}>
       <motion.div
-        className="fixed z-50 pointer-events-none left-0 top-0 flex flex-col items-center w-96"
-        style={{
-          transform: motionTranslate,
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            delay: isInitial ? 0.3 : 0,
+          },
         }}
-        initial="hide"
-        animate={haveImage ? 'show' : 'hide'}
       >
         <motion.div
-          className="border-b-[1px] border-grae absolute origin-right"
-          style={{ width: 'calc(100% + 0.5em)', bottom: 0, right: `-0.5em` }}
-          variants={{
-            hide: { scaleX: 0 },
-            show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
+          className="fixed z-50 pointer-events-none left-0 top-0 flex flex-col items-center w-96"
+          style={{
+            transform: motionTranslate,
           }}
-        />
-        <motion.div
-          className="border-r-[1px] border-grae absolute origin-center"
-          style={{ height: 'calc(100% + 1em)', bottom: `-0.5em`, right: 0 }}
-          variants={{
-            hide: { scaleY: 0, transition: { delay: 0.3, type: 'tween' } },
-            show: { scaleY: 1 },
-          }}
-        />
-        <motion.div
-          className="border-t-[1px] border-grae absolute origin-right"
-          style={{ width: 'calc(100% + 0.5em)', top: 0, right: `-0.5em` }}
-          variants={{
-            hide: { scaleX: 0 },
-            show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
-          }}
-        />
-        <motion.div
-          className="my-1 mr-1 bg-black/90 backdrop-blur-sm"
-          variants={{
-            hide: {
-              clipPath: `polygon(
+          initial="hide"
+          animate={haveImage ? 'show' : 'hide'}
+        >
+          <motion.div
+            className="border-b-[1px] border-grae absolute origin-right"
+            style={{ width: 'calc(100% + 0.5em)', bottom: 0, right: `-0.5em` }}
+            variants={{
+              hide: { scaleX: 0 },
+              show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
+            }}
+          />
+          <motion.div
+            className="border-r-[1px] border-grae absolute origin-center"
+            style={{ height: 'calc(100% + 1em)', bottom: `-0.5em`, right: 0 }}
+            variants={{
+              hide: { scaleY: 0, transition: { delay: 0.3, type: 'tween' } },
+              show: { scaleY: 1 },
+            }}
+          />
+          <motion.div
+            className="border-t-[1px] border-grae absolute origin-right"
+            style={{ width: 'calc(100% + 0.5em)', top: 0, right: `-0.5em` }}
+            variants={{
+              hide: { scaleX: 0 },
+              show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
+            }}
+          />
+          <motion.div
+            className="my-1 mr-1 bg-black/90 backdrop-blur-sm"
+            variants={{
+              hide: {
+                clipPath: `polygon(
                 100% 0%,
                 100% 0%,
                 100% 100%,
                 100% 100%
               )`,
-            },
-            show: {
-              clipPath: `polygon(
+              },
+              show: {
+                clipPath: `polygon(
                 0% 0%,
                 100% 0%,
                 100% 100%,
                 0% 100%
               )`,
-            },
-          }}
-        >
-          <AnimateHeight>
-            <motion.div
-              variants={{
-                hide: { opacity: 0 },
-                show: { opacity: 1, transition: { delay: 0.5 } },
-              }}
-            >
-              {project.previewImage!.type === 'image' && (
-                <Image
-                  className="w-96"
-                  src={project.previewImage!.src}
-                  alt={project.name}
-                />
-              )}
-              {project.previewImage!.type === 'video' && (
-                <video
-                  className="w-96"
-                  controls={false}
-                  autoPlay
-                  muted
-                  loop
-                  key={project.previewImage!.src}
-                >
-                  <source src={project.previewImage!.src} />
-                </video>
-              )}
-            </motion.div>
-          </AnimateHeight>
+              },
+            }}
+          >
+            <AnimateHeight>
+              <motion.div
+                variants={{
+                  hide: { opacity: 0 },
+                  show: { opacity: 1, transition: { delay: 0.5 } },
+                }}
+              >
+                {project.previewImage!.type === 'image' && (
+                  <Image
+                    className="w-96"
+                    src={project.previewImage!.src}
+                    alt={project.name}
+                  />
+                )}
+                {project.previewImage!.type === 'video' && (
+                  <video
+                    className="w-96"
+                    controls={false}
+                    autoPlay
+                    muted
+                    loop
+                    key={project.previewImage!.src}
+                  >
+                    <source src={project.previewImage!.src} />
+                  </video>
+                )}
+              </motion.div>
+            </AnimateHeight>
+          </motion.div>
         </motion.div>
       </motion.div>
     </MotionConfig>,

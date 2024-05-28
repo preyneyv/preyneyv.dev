@@ -50,10 +50,12 @@ function StarburstSVG() {
 }
 
 function ProjectCard({ project }: { project: FeaturedProject }) {
+  // TODO: replace this with project slug when project pages are complete.
+  const projectTarget = project.links[0].url
   return (
     <motion.div className="relative" initial="initial" whileHover="hover">
       <StarburstSVG />
-      <MotionLink href={`/projects/${project.slug}`} className="flex flex-col">
+      <MotionLink href={projectTarget} className="flex flex-col">
         <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
         <div className="relative pt-4 flex-1 flex flex-col">
           <motion.div
@@ -85,7 +87,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
           <p className="text-lg leading-tight">{project.description}</p>
           <div className="flex-1" />
           <div className="mt-2">
-            <ul className="flex gap-6 text-sm text-bloo">
+            <ul className="flex gap-6 text-sm text-bloo font-bold">
               {project.tech.map((tag) => (
                 <li key={tag}>{tag}</li>
               ))}
@@ -94,7 +96,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
         </div>
       </MotionLink>
       <motion.ul className="absolute flex justify-end bottom-0 left-0 translate-y-full w-full">
-        {project.links.map((link) => (
+        {project.links.toReversed().map((link) => (
           <motion.li
             key={link.type}
             variants={{
@@ -133,7 +135,7 @@ export default function FeaturedProjects() {
         </Link>
       </header>
 
-      <motion.div className="grid grid-cols-3 gap-8 relative">
+      <motion.div className="grid grid-cols-3 gap-16 relative">
         {data.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}

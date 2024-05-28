@@ -13,7 +13,7 @@ import {
   Search,
   Video,
 } from '@carbon/icons-react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { OverflowList } from 'react-overflow-list'
 import PreviewImageProvider, { usePreviewImage } from './preview'
 
