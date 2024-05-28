@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
 import './globals.css'
+import Footer from '@/components/footer'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -16,7 +17,6 @@ const spaceGrotesk = Space_Grotesk({
   weight: 'variable',
   variable: '--font-space-grotesk',
 })
-
 export const metadata: Metadata = {
   title: {
     default: 'Pranav Nutalapati',
@@ -45,6 +45,7 @@ export default function RootLayout({
               <Header key="header" />
               <MotionPageTransition>{children}</MotionPageTransition>
             </div>
+            <Footer />
           </main>
         </div>
       </body>

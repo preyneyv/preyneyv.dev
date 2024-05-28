@@ -1,12 +1,8 @@
 import { useIsInitialRender } from '@/components/custom-motion'
 import GlitchCanvas from '@/components/glitchy-canvas'
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Link from 'next/link'
+import { useRef } from 'react'
 
 export default function Hero() {
   const isInitial = useIsInitialRender()
@@ -65,14 +61,16 @@ export default function Hero() {
         animate="animate"
       >
         <motion.p className="mb-[1em]" variants={childVariants}>
-          Full-stack engineer with a passion for
+          Full-stack developer with a passion for
           <br />
           user experience and real-time systems.
         </motion.p>
         <motion.p className="mb-[1em]" variants={childVariants}>
-          WorldSkills 2019 Silver Medalist
-          <br />
-          in Web Technologies.
+          <Link href="https://results.worldskills.org/results?event=364&offset=0&skill=609&base_skill=127">
+            WorldSkills 2019 Silver Medalist
+            <br />
+            in Web Technologies.
+          </Link>
         </motion.p>
         <motion.p variants={childVariants}>
           Currently transforming client

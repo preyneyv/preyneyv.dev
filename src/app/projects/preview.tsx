@@ -149,7 +149,7 @@ function PreviewImage({
             }}
           />
           <motion.div
-            className="my-1 mr-1 bg-black/90 backdrop-blur-sm"
+            className="my-1 mr-1 bg-black/60 backdrop-blur-sm"
             variants={{
               hide: {
                 clipPath: `polygon(

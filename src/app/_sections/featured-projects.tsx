@@ -55,7 +55,11 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
   return (
     <motion.div className="relative" initial="initial" whileHover="hover">
       <StarburstSVG />
-      <MotionLink href={projectTarget} className="flex flex-col">
+      <MotionLink
+        href={projectTarget}
+        target="_blank"
+        className="flex flex-col"
+      >
         <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
         <div className="relative pt-4 flex-1 flex flex-col">
           <motion.div

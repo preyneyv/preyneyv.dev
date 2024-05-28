@@ -214,7 +214,7 @@ export default function Header() {
           animate={{ height: `100vh` }}
         />
         <motion.header
-          className="fixed w-screen z-20 bg-gradient-to-b from-black to-transparent left-0 top-0 pt-24 flex justify-center"
+          className="fixed w-screen z-20 bg-gradient-to-b from-black from-[10%] to-transparent left-0 top-0 pt-24 flex justify-center"
           style={headerStyle}
         >
           <motion.div className="w-full max-w-7xl">
@@ -289,7 +289,7 @@ export default function Header() {
                 style={{ opacity: useTransform(p1, [0, 1], [1, 0]) }}
                 className="text-2xl"
               >
-                Software Developer & Designer
+                Software Engineer & Designer
               </motion.h3>
             </motion.div>
           </motion.div>
