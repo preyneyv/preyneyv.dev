@@ -7,11 +7,11 @@ function Telestrator() {
 export default {
   name: 'Telestrator',
   slug: 'telestrator',
+  tagline: `Freehand illustration tool for sports/esports analysts.`,
   description: (
     <>
-      Freehand illustration tool for sports/esports analysts. A video feed is
-      ingested through NDI, then compressed with NVENC and streamed over WebRTC
-      to an iPad for low-latency telestration.
+      A video feed is ingested through NDI, then compressed with NVENC and
+      streamed over WebRTC to an iPad for low-latency telestration.
     </>
   ),
   tech: ['Rust', 'WebRTC', 'NVENC', 'NDI', 'H.264'],

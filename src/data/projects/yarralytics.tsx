@@ -7,12 +7,12 @@ function Yarralytics() {
 export default {
   name: 'Yarralytics',
   slug: 'yarralytics',
+  tagline: `In-depth post-game performance analytics for Brawlhalla.`,
   description: (
     <>
-      In-depth post-game performance analytics for Brawlhalla. Website and
-      native Rust client that automatically renders statistics as a post-game
-      overlay. Games are processed by a distributed cluster of worker VMs
-      coordinated through Service Bus.
+      Website and native Rust client that automatically renders statistics as a
+      post-game overlay. Games are processed by a distributed cluster of worker
+      VMs coordinated through Service Bus.
     </>
   ),
   tech: ['Next.js', 'Rust', 'Tailwind', 'Azure', 'CF Workers'],

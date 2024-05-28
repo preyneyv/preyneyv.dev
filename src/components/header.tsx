@@ -15,7 +15,7 @@ import {
 } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 
 function AEYAnim({
   progress: rawProgress,
@@ -126,7 +126,7 @@ function NavLink({
       <MotionLink
         href={href}
         scroll={false}
-        className="w-28 overflow-hidden text-right block"
+        className="w-28 overflow-clip text-right block"
         whileHover={'hover'}
         animate={isActive ? ['hover', 'active'] : undefined}
         target={newTab ? '_blank' : undefined}
@@ -136,7 +136,7 @@ function NavLink({
           initial={{ translateX: 0 }}
           variants={{
             hover: {
-              translateX: '-2em',
+              translateX: '-1.8em',
             },
             active: {
               color: colors.bloo,

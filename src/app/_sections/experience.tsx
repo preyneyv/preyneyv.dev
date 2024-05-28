@@ -138,7 +138,7 @@ export default function Experience() {
             </motion.h3>
           </AnimatePresence>
           <AnimatePresence mode="popLayout" initial={false}>
-            <motion.p
+            <motion.div
               key={index}
               initial={{ opacity: 0, translateY: '-0.2em' }}
               animate={{
@@ -147,10 +147,10 @@ export default function Experience() {
                 transition: { delay: 0.7, duration: 0.3 },
               }}
               exit={{ opacity: 0, translateY: '0.2em' }}
-              className="text-xl max-w-4xl"
+              className="text-xl max-w-4xl text-pretty [&_p]:mb-[1em]"
             >
               {active.description}
-            </motion.p>
+            </motion.div>
           </AnimatePresence>
         </AnimateHeight>
       </section>

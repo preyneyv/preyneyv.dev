@@ -10,7 +10,10 @@ const IconButton = forwardRef<
       ref={ref}
       {...props}
       disabled={disabled ? true : undefined}
-      className={clsx('disabled:opacity-20 transition-opacity', className)}
+      className={clsx(
+        'disabled:opacity-20 transition-opacity flex justify-center items-center',
+        className
+      )}
     >
       {children}
     </button>

@@ -10,11 +10,12 @@ export default {
       url: 'https://www.youtube.com/watch?v=3m4HonM1uTI',
     },
   ],
+  for: 'Georgia Tech',
+  tagline: `Machine Learning (CS 4641) end-of-semester project to solve a Rubik’s Cube
+  using reinforcement learning.`,
   description: (
     <>
-      Machine Learning (CS 4641) end-of-semester project to solve a Rubik’s Cube
-      using reinforcement learning. Explored a variety of agents, network
-      architectures, and hyperparameters.
+      Explored a variety of agents, network architectures, and hyperparameters.
     </>
   ),
 } satisfies Project

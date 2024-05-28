@@ -42,6 +42,10 @@ export const MotionPageTransition = ({ children }: { children: ReactNode }) => {
   const isInitial = useRef(true)
   isInitial.current &&= path === firstPath.current
 
+  // if (process.env.NODE_ENV !== 'production') {
+  //   return children
+  // }
+
   return (
     <MotionInitialCtx.Provider value={isInitial.current ?? true}>
       <div className="relative w-full">
@@ -49,9 +53,9 @@ export const MotionPageTransition = ({ children }: { children: ReactNode }) => {
           <motion.div
             className="w-full"
             key={path}
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, translateY: 0 }}
             animate={{ opacity: 1, transition: { delay: 0.3 } }}
-            exit={{ opacity: 0, position: 'absolute' }}
+            exit={{ opacity: 0, translateY: '-1vh', position: 'absolute' }}
           >
             <FrozenRouter>{children}</FrozenRouter>
           </motion.div>

@@ -20,20 +20,21 @@ export type Project = {
   links: { type: 'external' | 'github' | 'video' | 'article'; url: string }[]
   description?: ReactNode
   component?: FC
-  professional?: string
+  for?: string
+  tagline?: string
 }
 
 export default [
   yarralytics,
   telestrator,
+  hateoasButClientSide,
+  brawlhallaEsportsStreamToolkit,
+  brawhallaEsportsBrawlhallaCom,
+  brawlhallaEsportsOdinsJournal,
   codeDumper,
   skinExplorer,
-  hateoasButClientSide,
   reinforcementLearningAdventures,
   rubiksCubeRlAgents,
   sonaButItsPlayedOnAPiano,
-  brawhallaEsportsBrawlhallaCom,
-  brawlhallaEsportsOdinsJournal,
   brawlhallaEsportsReactiveStageLighting,
-  brawlhallaEsportsStreamToolkit,
 ] as Project[]

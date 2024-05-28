@@ -85,7 +85,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
           <p className="text-lg leading-tight">{project.description}</p>
           <div className="flex-1" />
           <div className="mt-2">
-            <ul className="flex gap-6 text-sm">
+            <ul className="flex gap-6 text-sm text-bloo">
               {project.tech.map((tag) => (
                 <li key={tag}>{tag}</li>
               ))}
@@ -134,7 +134,7 @@ export default function FeaturedProjects() {
       </header>
 
       <motion.div className="grid grid-cols-3 gap-8 relative">
-        {data.map((project, i) => (
+        {data.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
         <svg

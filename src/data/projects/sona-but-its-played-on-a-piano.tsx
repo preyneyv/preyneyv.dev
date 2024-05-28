@@ -14,12 +14,12 @@ export default {
       url: 'https://github.com/preyneyv/lol-piano',
     },
   ],
+  tagline: `Using a digital piano to play Sona (a musical champion in League of
+    Legends).`,
   description: (
     <>
-      Using a digital piano to play Sona (a musical champion in League of
-      Legends). Abilities are mapped to chords on the piano. Because both hands
-      are preoccupied, mouse control is done using computer vision tracking a
-      foot.
+      Abilities are mapped to chords on the piano. Because both hands are
+      preoccupied, mouse control is done using computer vision tracking a foot.
     </>
   ),
 } satisfies Project

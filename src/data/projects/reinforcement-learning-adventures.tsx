@@ -10,10 +10,12 @@ export default {
       url: 'https://medium.com/@preyneyv/reinforcement-learning-adventures-ba99cc27eb85',
     },
   ],
+  tagline: `Exploration using Deep Q-Networks to play the Chrome Dinosaur Game,
+  Connect 4, and Othello.`,
   description: (
     <>
-      Exploration using Deep Q-Networks to play the Chrome Dinosaur Game,
-      Connect 4, and Othello.
+      This was my first exposure to reinforcement learning, inspired by OpenAI's
+      article on emergent tool use in RL agents.
     </>
   ),
 } satisfies Project

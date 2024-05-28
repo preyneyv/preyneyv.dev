@@ -18,7 +18,10 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Pranav Nutalapati',
+  title: {
+    default: 'Pranav Nutalapati',
+    template: '%s ⁄⁄ Pranav Nutalapati',
+  },
   description: 'Software Developer & Designer',
 }
 
@@ -36,7 +39,7 @@ export default function RootLayout({
           'font-space-grotesk relative'
         )}
       >
-        <div className="w-screen overflow-x-hidden">
+        <div className="w-screen overflow-x-clip">
           <main className="flex min-h-screen flex-col items-center justify-between w-screen">
             <div className="w-screen max-w-7xl">
               <Header key="header" />
