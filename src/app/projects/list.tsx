@@ -1,5 +1,6 @@
 'use client'
 
+import { useHover } from 'react-use'
 import { MotionLink, useIsInitialRender } from '@/components/custom-motion'
 import { colors } from '@/constants'
 import { Project } from '@/data/projects'
@@ -14,6 +15,7 @@ import {
 } from '@carbon/icons-react'
 import { motion } from 'framer-motion'
 import { OverflowList } from 'react-overflow-list'
+import PreviewImageProvider, { usePreviewImage } from './preview'
 
 const DiagonalSVG = () => {
   const pathProps = {
@@ -94,6 +96,11 @@ function TechList({ items }: { items: string[] }) {
 }
 
 function ProjectListItem({ project }: { project: Project }) {
+  const previewImage = usePreviewImage(project)
+
+  // TODO: replace this with project slug when pages are implemented.
+  const projectTarget = project.links[0].url
+
   return (
     <motion.div
       className="block group text-pretty relative"
@@ -105,7 +112,12 @@ function ProjectListItem({ project }: { project: Project }) {
       }}
       transition={{ duration: 1 }}
     >
-      <motion.div whileHover="hover" initial="initial">
+      <motion.div
+        whileHover="hover"
+        initial="initial"
+        onHoverStart={previewImage.onHoverStart}
+        onHoverEnd={previewImage.onHoverEnd}
+      >
         <div className="border-b-[1px] border-b-dark -mt-[4px] absolute right-0 top-[24px] w-full -z-10 origin-right" />
         <motion.div
           className="border-l-[1px] border-l-dark absolute -left-[1px]  h-full -z-10 origin-top"
@@ -119,7 +131,7 @@ function ProjectListItem({ project }: { project: Project }) {
         />
         <DiagonalSVG />
         <motion.ul
-          className="flex flex-col gap-0 absolute -left-10 -top-[6px]"
+          className="flex flex-col gap-0 absolute -left-10 -top-[6px] h-full"
           variants={{
             hover: {
               transition: {
@@ -132,6 +144,7 @@ function ProjectListItem({ project }: { project: Project }) {
           {project.links.map((link) => (
             <motion.li
               key={link.type}
+              style={{ translateX: 0 }}
               variants={{
                 initial: { translateX: '5%', opacity: 0 },
                 hover: {
@@ -146,7 +159,7 @@ function ProjectListItem({ project }: { project: Project }) {
               <MotionLink
                 href={link.url}
                 target="_blank"
-                className="p-2 block text-neutral-600 hover:text-white transition-colors duration-600"
+                className="p-2 block text-neutral-600 hover:text-white transition-colors duration-700"
               >
                 {link.type === 'github' && <LogoGithub size={20} />}
                 {link.type === 'external' && <Launch size={20} />}
@@ -156,7 +169,7 @@ function ProjectListItem({ project }: { project: Project }) {
             </motion.li>
           ))}
         </motion.ul>
-        <MotionLink href={`/projects/${project.slug}`} className="mb-1 block">
+        <MotionLink href={projectTarget} target="_blank" className="mb-1 block">
           <header className="flex justify-between">
             <h2 className="text-2xl font-bold group-hover:font-extrabold transition-[font-weight] leading-none">
               {project.name}
@@ -172,7 +185,7 @@ function ProjectListItem({ project }: { project: Project }) {
             {project.tagline ? (
               <>
                 <span>{project.tagline}&nbsp;</span>
-                <span className="text-neutral-500 group-hover:text-white transition-colors duration-1000">
+                <span className="text-neutral-500 group-hover:text-white transition-colors duration-700">
                   {project.description}
                 </span>
               </>
@@ -188,57 +201,69 @@ function ProjectListItem({ project }: { project: Project }) {
   )
 }
 
+// TODO: implement project search
+function ProjectSearch() {
+  const isInitial = useIsInitialRender()
+  return (
+    <motion.header
+      className="flex mb-8 bg-black"
+      initial={{
+        opacity: 0,
+        clipPath: `polygon(
+          calc(100% + 5rem) 0,
+          calc(100% + 5rem) 0,
+          100% 5rem,
+          100% 5rem
+        )`,
+      }}
+      animate={{
+        opacity: 1,
+        clipPath: `polygon(
+        0 0,
+        calc(100% + 5rem) 0,
+        100% 5rem,
+        -5rem 5rem
+      )`,
+      }}
+      transition={{
+        duration: 0.7,
+        delay: isInitial ? 1 : 0.5,
+      }}
+    >
+      <input
+        type="search"
+        className="w-full bg-transparent font-space-grotesk border-y-[1px] border-dark text-2xl outline-none font-semibold placeholder:text-grae"
+        placeholder="Search Projects"
+      />
+      <IconButton className="aspect-square w-20 border-[1px] border-dark">
+        <Search size={28} />
+      </IconButton>
+    </motion.header>
+  )
+}
+
 export default function ProjectList({ projects }: { projects: Project[] }) {
   const isInitial = useIsInitialRender()
   return (
-    <div>
-      <motion.header
-        className="flex mb-8 bg-black"
-        initial={{
-          opacity: 0,
-          clipPath: `polygon(
-            calc(100% + 5rem) 0,
-            calc(100% + 5rem) 0,
-            100% 5rem,
-            100% 5rem
-          )`,
-        }}
-        animate={{
-          opacity: 1,
-          clipPath: `polygon(
-            0 0,
-            calc(100% + 5rem) 0,
-            100% 5rem,
-            -5rem 5rem
-          )`,
-        }}
-        transition={{
-          duration: 0.7,
-          delay: isInitial ? 1 : 0.5,
-        }}
-      >
-        <input
-          type="search"
-          className="w-full bg-transparent font-space-grotesk border-y-[1px] border-dark text-2xl outline-none font-semibold placeholder:text-grae"
-          placeholder="Search Projects"
-        />
-        <IconButton className="aspect-square w-20 border-[1px] border-dark">
-          <Search size={28} />
-        </IconButton>
-      </motion.header>
-      <motion.div
-        className="grid gap-8"
-        initial="initial"
-        animate="animate"
-        transition={{
-          staggerChildren: 0.1,
-          delayChildren: isInitial ? 1.5 : 1,
-        }}
-      >
-        {projects.map((project) => (
-          <ProjectListItem key={project.slug} project={project} />
-        ))}
-      </motion.div>
+    <div style={{ containerType: 'inline-size' }}>
+      <h1 className="font-syne font-extrabold uppercase text-[8cqw] -mt-[0.37em]">
+        Projects
+      </h1>
+      <PreviewImageProvider>
+        <motion.div
+          className="grid gap-8"
+          initial="initial"
+          animate="animate"
+          transition={{
+            staggerChildren: 0.1,
+            delayChildren: isInitial ? 1.5 : 1,
+          }}
+        >
+          {projects.map((project) => (
+            <ProjectListItem key={project.slug} project={project} />
+          ))}
+        </motion.div>
+      </PreviewImageProvider>
     </div>
   )
 }

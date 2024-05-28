@@ -1,7 +1,6 @@
 import projects from '@/data/projects'
-import ProjectList from './list'
-import Aside from './aside'
 import { Metadata } from 'next'
+import ProjectView from './client'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -14,12 +13,5 @@ export default function Page() {
     return rest
   })
 
-  return (
-    <>
-      <div className="grid grid-cols-[400px_2fr] gap-16">
-        <Aside />
-        <ProjectList projects={mapped} />
-      </div>
-    </>
-  )
+  return <ProjectView projects={mapped} />
 }

@@ -13,4 +13,8 @@ export default {
       and a SvelteKit front-end.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/brawlhalla-esports/brawlhalla-com.mp4',
+  },
 } satisfies Project

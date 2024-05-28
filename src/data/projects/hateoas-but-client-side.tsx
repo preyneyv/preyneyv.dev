@@ -1,4 +1,5 @@
 import type { Project } from '../projects'
+import previewImage from '../.../../../../public/previews/hateoas-but-client-side.png'
 
 function HATEOAS() {
   return null
@@ -27,4 +28,8 @@ export default {
     },
   ],
   component: HATEOAS,
+  previewImage: {
+    type: 'image',
+    src: previewImage,
+  },
 } satisfies Project

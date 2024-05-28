@@ -5,11 +5,11 @@ export default {
   slug: 'skin-explorer',
   tech: ['Next.js', 'Node.js', 'Redis'],
   links: [
-    { type: 'github', url: 'https://github.com/preyneyv/lol-skin-explorer' },
     {
       type: 'external',
       url: 'https://skinexplorer.lol',
     },
+    { type: 'github', url: 'https://github.com/preyneyv/lol-skin-explorer' },
   ],
   tagline: `Splash art viewer for League of Legends champions.`,
   description: (
@@ -18,4 +18,8 @@ export default {
       refreshes with new content whenever a new game patch is released.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/skin-explorer.mp4',
+  },
 } satisfies Project

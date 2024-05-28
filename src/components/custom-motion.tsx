@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -13,6 +14,7 @@ import {
 } from 'react'
 
 export const MotionLink = motion(Link)
+export const MotionImage = motion(Image)
 
 /**
  * Freeze all rendered components at time of render. Used for route transitions

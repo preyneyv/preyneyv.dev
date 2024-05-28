@@ -1,12 +1,13 @@
 'use client'
 
 import GlitchCanvas from '@/components/glitchy-canvas'
+import Link from 'next/link'
 
 export default function Aside() {
   return (
     <div>
       <aside className="sticky top-32">
-        <svg viewBox="2 2 138 43">
+        {/* <svg viewBox="2 2 138 43">
           <text
             className="font-syne font-extrabold"
             textAnchor="start"
@@ -21,7 +22,17 @@ export default function Aside() {
               ECTS
             </tspan>
           </text>
-        </svg>
+        </svg> */}
+        <p className="text-lg leading-none text-neutral-500">
+          You can find more of my projects and experiments{' '}
+          <Link
+            className="border-b-[1px] border-b-grae"
+            href="/github"
+            target="_blank"
+          >
+            on GitHub.
+          </Link>
+        </p>
       </aside>
       <div className="w-24 opacity-20 fixed bottom-24 -z-20">
         <GlitchCanvas layer={2} />

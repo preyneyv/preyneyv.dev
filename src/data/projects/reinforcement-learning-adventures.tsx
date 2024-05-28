@@ -18,4 +18,8 @@ export default {
       article on emergent tool use in RL agents.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/reinforcement-learning-adventures.mp4',
+  },
 } satisfies Project

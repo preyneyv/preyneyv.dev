@@ -1,4 +1,5 @@
 import { Project } from '../../projects'
+import previewImage from '../../../../public/previews/brawlhalla-esports/stream-toolkit.png'
 
 export default {
   name: 'Stream Toolkit (Gjallarhorn)',
@@ -17,4 +18,8 @@ export default {
       livestream.
     </>
   ),
+  previewImage: {
+    type: 'image',
+    src: previewImage,
+  },
 } satisfies Project

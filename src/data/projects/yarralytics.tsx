@@ -1,4 +1,5 @@
 import type { Project } from '../projects'
+import previewImage from '../../../public/previews/yarralytics.png'
 
 function Yarralytics() {
   return null
@@ -7,7 +8,7 @@ function Yarralytics() {
 export default {
   name: 'Yarralytics',
   slug: 'yarralytics',
-  tagline: `In-depth post-game performance analytics for Brawlhalla.`,
+  tagline: `Detailed post-game performance analytics for Brawlhalla.`,
   description: (
     <>
       Website and native Rust client that automatically renders statistics as a
@@ -15,7 +16,11 @@ export default {
       VMs coordinated through Service Bus.
     </>
   ),
-  tech: ['Next.js', 'Rust', 'Tailwind', 'Azure', 'CF Workers'],
+  tech: ['Next.js', 'Rust', 'D3', 'Azure', 'CF Workers'],
   links: [{ type: 'external', url: 'https://yarralytics.bh' }],
   component: Yarralytics,
+  previewImage: {
+    type: 'image',
+    src: previewImage,
+  },
 } satisfies Project

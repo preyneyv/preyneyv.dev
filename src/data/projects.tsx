@@ -12,6 +12,7 @@ import brawhallaEsportsBrawlhallaCom from './projects/brawlhalla-esports/brawlha
 import brawlhallaEsportsOdinsJournal from './projects/brawlhalla-esports/odins-journal'
 import brawlhallaEsportsReactiveStageLighting from './projects/brawlhalla-esports/reactive-stage-lighting'
 import brawlhallaEsportsStreamToolkit from './projects/brawlhalla-esports/stream-toolkit'
+import { StaticImageData } from 'next/image'
 
 export type Project = {
   name: string
@@ -22,6 +23,15 @@ export type Project = {
   component?: FC
   for?: string
   tagline?: string
+  previewImage?:
+    | {
+        type: 'image'
+        src: string | StaticImageData
+      }
+    | {
+        type: 'video'
+        src: string
+      }
 }
 
 export default [

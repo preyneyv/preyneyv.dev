@@ -14,4 +14,8 @@ export default {
       and player damage.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/brawlhalla-esports/reactive-stage-lighting.mp4',
+  },
 } satisfies Project

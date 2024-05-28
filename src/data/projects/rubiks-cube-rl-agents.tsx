@@ -18,4 +18,8 @@ export default {
       Explored a variety of agents, network architectures, and hyperparameters.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/rubiks-cube-rl-agents.mp4',
+  },
 } satisfies Project

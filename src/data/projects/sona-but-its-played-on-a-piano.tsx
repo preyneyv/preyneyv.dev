@@ -22,4 +22,8 @@ export default {
       preoccupied, mouse control is done using computer vision tracking a foot.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/sona-but-its-played-on-a-piano.mp4',
+  },
 } satisfies Project

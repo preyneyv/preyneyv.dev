@@ -109,7 +109,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
             <MotionLink
               href={link.url}
               target="_blank"
-              className="p-2 block text-neutral-600 hover:text-white transition-colors duration-600"
+              className="p-2 block text-neutral-600 hover:text-white transition-colors duration-300"
             >
               {link.type === 'github' && <LogoGithub size={20} />}
               {link.type === 'external' && <Launch size={20} />}
