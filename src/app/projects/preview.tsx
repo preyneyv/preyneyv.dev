@@ -64,21 +64,14 @@ export function usePreviewImage(project: Project) {
 function PreviewImage({
   project: rawProject,
   x,
+  y,
 }: {
   project: Project | null
   x: MotionValue<number>
+  y: MotionValue<number>
 }) {
   const isInitial = useIsInitialRender()
-  const y = useMotionValue(0)
-  useEffect(() => {
-    const listener = (e: MouseEvent) => {
-      y.set(e.clientY)
-    }
-    document.addEventListener('mousemove', listener, { passive: true })
-    return () => {
-      document.removeEventListener('mousemove', listener)
-    }
-  }, [])
+
   const springY = useSpring(y, {
     bounce: 0,
   })
@@ -117,8 +110,11 @@ function PreviewImage({
         }}
       >
         <motion.div
-          className="fixed z-50 pointer-events-none left-0 top-0 flex flex-col items-center w-96"
+          className="fixed z-50 pointer-events-none left-0 top-0 flex flex-col items-center"
           style={{
+            width: '23vw',
+            maxWidth: '480px',
+            minWidth: '290px',
             transform: motionTranslate,
           }}
           initial="hide"
@@ -176,16 +172,16 @@ function PreviewImage({
                   show: { opacity: 1, transition: { delay: 0.5 } },
                 }}
               >
-                {project.previewImage!.type === 'image' && (
+                {project.previewImage?.type === 'image' && (
                   <Image
-                    className="w-96"
+                    className="w-full"
                     src={project.previewImage!.src}
                     alt={project.name}
                   />
                 )}
-                {project.previewImage!.type === 'video' && (
+                {project.previewImage?.type === 'video' && (
                   <video
-                    className="w-96"
+                    className="w-full"
                     controls={false}
                     autoPlay
                     muted
@@ -203,6 +199,30 @@ function PreviewImage({
     </MotionConfig>,
     document.body
   )
+}
+
+function PreviewImageGuard({
+  project,
+  x,
+}: {
+  project: Project | null
+  x: MotionValue<number>
+}) {
+  const [canRender, setCanRender] = useState(false)
+  const y = useMotionValue(0)
+  useEffect(() => {
+    const listener = (e: MouseEvent) => {
+      y.set(e.clientY)
+      if (!canRender) setCanRender(true)
+    }
+    document.addEventListener('mousemove', listener, { passive: true })
+    return () => {
+      document.removeEventListener('mousemove', listener)
+    }
+  }, [canRender])
+
+  if (!canRender) return null
+  return <PreviewImage project={project} x={x} y={y} />
 }
 
 export default function PreviewImageProvider({
@@ -227,7 +247,7 @@ export default function PreviewImageProvider({
       <PreviewImageContext.Provider value={{ updateProject }}>
         {children}
       </PreviewImageContext.Provider>
-      <PreviewImage project={activeProject} x={x} />
+      <PreviewImageGuard project={activeProject} x={x} />
     </div>
   )
 }

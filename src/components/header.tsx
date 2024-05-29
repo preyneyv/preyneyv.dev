@@ -160,22 +160,6 @@ export default function Header() {
     offset: ['start start', 'end start'],
   })
 
-  // const isLandingPage = usePathname() === '/'
-  // const progress = useMotionValue(0)
-  // useEffect(() => {
-  //   const animProperties = {
-  //     duration: 0.5,
-  //   }
-  //   if (isLandingPage) {
-  //     animate(progress, scrollYProgress.get(), animProperties)
-  //     return scrollYProgress.on('change', (value) => {
-  //       progress.animation?.complete()
-  //       progress.set(value)
-  //     })
-  //   } else {
-  //     animate(progress, 1, animProperties)
-  //   }
-  // }, [isLandingPage, scrollYProgress])
   const progress = scrollYProgress
 
   const midpoint = 0.5
@@ -214,10 +198,10 @@ export default function Header() {
           animate={{ height: `100vh` }}
         />
         <motion.header
-          className="fixed w-screen z-20 bg-gradient-to-b from-black from-[10%] to-transparent left-0 top-0 pt-24 flex justify-center"
+          className="fixed w-screen z-20 bg-gradient-to-b from-black from-[20%] to-transparent left-0 top-0 pt-24 flex justify-center"
           style={headerStyle}
         >
-          <motion.div className="w-full max-w-7xl">
+          <motion.div className="w-full max-w-7xl px-9">
             <div className="flex justify-between w-full relative">
               <div className="relative select-none">
                 <motion.h1
@@ -259,6 +243,7 @@ export default function Header() {
                   },
                 }}
               >
+                <NavLink href="/">Home</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
                 <NavLink newTab href="/resume">
                   Resume
@@ -266,7 +251,6 @@ export default function Header() {
                 <NavLink newTab href="/github">
                   GitHub
                 </NavLink>
-                <NavLink href="/contact">Contact</NavLink>
               </motion.nav>
 
               <motion.div

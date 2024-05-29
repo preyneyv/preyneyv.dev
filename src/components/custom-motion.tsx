@@ -10,8 +10,10 @@ import {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useRef,
 } from 'react'
+import { AnimateHeight } from './animate-height'
 
 export const MotionLink = motion(Link)
 export const MotionImage = motion(Image)

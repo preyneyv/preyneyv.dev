@@ -89,7 +89,7 @@ export default function Education() {
           </h2>
           <div className="flex justify-between items-center">
             <h3 className="text-md">Bachelor of Science in Computer Science</h3>
-            <h3 className="text-right text-md leading-[0.8]">GPA: 3.94</h3>
+            {/* <h3 className="text-right text-md leading-[0.8]">GPA: 3.94</h3> */}
           </div>
           <div className="flex text-xs uppercase font-bold leading-none items-center">
             <h3 className="text-bloo">Aug 2020 &mdash; Dec 2022</h3>

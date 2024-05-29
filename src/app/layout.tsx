@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
 import './globals.css'
-import Footer from '@/components/footer'
+import Footer from '@/components/footer/footer'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="!overflow-visible">
       <body
         className={clsx(
           syne.variable,
@@ -41,7 +41,7 @@ export default function RootLayout({
       >
         <div className="w-screen overflow-x-clip">
           <main className="flex min-h-screen flex-col items-center justify-between w-screen">
-            <div className="w-screen max-w-7xl">
+            <div className="w-screen max-w-7xl px-9">
               <Header key="header" />
               <MotionPageTransition>{children}</MotionPageTransition>
             </div>

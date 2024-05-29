@@ -1,10 +1,10 @@
 'use client'
 import { MotionConfig } from 'framer-motion'
-import Hero from './_components/hero'
+import Certifications from './_sections/certifications'
 import Education, { GTImage } from './_sections/education'
 import Experience from './_sections/experience'
 import FeaturedProjects from './_sections/featured-projects'
-import Certifications from './_sections/certifications'
+import Hero from './_sections/hero'
 
 export default function Home() {
   return (
@@ -14,7 +14,6 @@ export default function Home() {
       }}
     >
       <Hero />
-
       <FeaturedProjects />
       <div className="mb-24" />
       <Experience />
