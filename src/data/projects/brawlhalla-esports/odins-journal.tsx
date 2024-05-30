@@ -13,4 +13,8 @@ export default {
       votes in an overlay window.
     </>
   ),
+  previewImage: {
+    type: 'video',
+    src: '/previews/brawlhalla-esports/odins-journal.mp4',
+  },
 } satisfies Project

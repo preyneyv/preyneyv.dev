@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: '/resume',
-        destination: 'https://google.com/wow',
+        destination: '/resume.pdf',
         permanent: false,
       },
       {
