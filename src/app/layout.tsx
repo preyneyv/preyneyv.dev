@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
 import './globals.css'
 import Footer from '@/components/footer/footer'
+import { Analytics } from '@vercel/analytics/react'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -48,6 +49,7 @@ export default function RootLayout({
             <Footer />
           </main>
         </div>
+        <Analytics />
       </body>
     </html>
   )
