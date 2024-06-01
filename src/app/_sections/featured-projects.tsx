@@ -67,39 +67,42 @@ function ProjectCard({
       whileHover={canHover ? 'hover' : undefined}
       animate={canHover ? undefined : 'hover'}
     >
-      <StarburstSVG />
       <MotionLink
         href={projectTarget}
         target="_blank"
         className="flex flex-col h-full"
       >
-        <div className="relative pt-4 flex-1 flex flex-col">
+        <div className="relative flex-1 flex flex-col">
           <motion.div
             variants={{
-              initial: { height: 0 },
+              initial: { transform: `scaleY(0%)` },
               hover: {
-                height: `calc(100% + 1em)`,
+                transform: `scaleY(100%)`,
               },
             }}
             className={clsx(
-              'absolute border-dark left-0 w-full -top-[1em] pointer-events-none border-l-[1px]'
+              'absolute border-dark left-0 top-0 origin-top-left w-full h-full pointer-events-none border-l-[1px]'
             )}
           />
           <motion.div
             variants={{
-              initial: { width: 0 },
+              initial: { transform: `scaleX(0%)` },
               hover: {
-                width: `calc(100% + 1em)`,
+                transform: `scaleX(100%)`,
                 transition: {
                   delay: 0.3,
                 },
               },
             }}
             className={clsx(
-              'absolute border-b-[1px] border-dark -left-[1em] bottom-0 pointer-events-none'
+              'absolute border-b-[1px] border-dark w-full bottom-0 origin-left pointer-events-none'
             )}
           />
-          <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
+          <header className="relative">
+            <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
+            <StarburstSVG />
+            <div className="absolute right-0 bottom-0" />
+          </header>
           <p className="text-lg sm:text-md md:text-lg !leading-tight">
             {project.description}
           </p>
@@ -165,7 +168,7 @@ export default function FeaturedProjects() {
             canHover={canHover}
           />
         ))}
-        <svg
+        {/* <svg
           className="w-screen absolute right-0 -scale-x-100 top-[1.5em] -z-10 pointer-events-none"
           style={{
             transform: 'translateY(-4px)',
@@ -177,7 +180,7 @@ export default function FeaturedProjects() {
             stroke={colors.dark}
             strokeWidth={1}
           />
-        </svg>
+        </svg> */}
       </motion.div>
     </section>
   )

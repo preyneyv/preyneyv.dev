@@ -16,6 +16,7 @@ import {
 import { motion } from 'framer-motion'
 import { OverflowList } from 'react-overflow-list'
 import PreviewImageProvider, { usePreviewImage } from './preview'
+import clsx from 'clsx'
 
 const DiagonalSVG = () => {
   const pathProps = {
@@ -126,7 +127,7 @@ function ProjectListItem({
         onHoverEnd={previewImage.onHoverEnd}
       >
         <motion.div
-          className="border-l-[1px] border-l-dark absolute -left-[1px]  h-full -z-10 origin-top"
+          className="border-l-[1px] border-l-dark absolute -left-[1px] h-full -z-10 origin-top hidden lg:block"
           variants={{
             initial: { scaleY: 0 },
             hover: {
@@ -135,8 +136,41 @@ function ProjectListItem({
           }}
           transition={{ duration: 0.3, type: 'tween' }}
         />
+        <MotionLink href={projectTarget} target="_blank" className="mb-1 block">
+          <header className="flex justify-between relative">
+            <h2 className="text-2xl font-bold group-hover:font-extrabold transition-[font-weight] leading-none">
+              {project.name}
+            </h2>
+            <div className="border-b-[1px] border-b-dark absolute right-0 bottom-[3px] w-full -z-10 origin-right" />
+            <DiagonalSVG />
+          </header>
+          {project.for && (
+            <h4 className="text-xs uppercase tracking-wider font-bold text-neutral-500">
+              <span className="text-grae mr-1">⁄⁄</span>
+              {project.for}
+            </h4>
+          )}
+          <div className="my-2 leading-snug">
+            {project.tagline ? (
+              <>
+                <span>{project.tagline}&nbsp;</span>
+                <span className="text-neutral-500 group-hover:text-white transition-colors duration-700">
+                  {project.description}
+                </span>
+              </>
+            ) : (
+              project.description
+            )}
+          </div>
+        </MotionLink>
+
+        <TechList items={project.tech} />
+
         <motion.ul
-          className="flex flex-col gap-0 absolute -left-10 -top-[6px] h-full"
+          className={clsx(
+            'flex gap-0 border-t-[1px] border-dark justify-end',
+            'lg:flex-col lg:absolute lg:-left-10 lg:-top-[6px] lg:h-full lg:justify-start lg:border-t-0'
+          )}
           variants={{
             hover: {
               transition: {
@@ -174,35 +208,6 @@ function ProjectListItem({
             </motion.li>
           ))}
         </motion.ul>
-        <MotionLink href={projectTarget} target="_blank" className="mb-1 block">
-          <header className="flex justify-between relative">
-            <h2 className="text-2xl font-bold group-hover:font-extrabold transition-[font-weight] leading-none">
-              {project.name}
-            </h2>
-            <div className="border-b-[1px] border-b-dark -mt-[4px] absolute right-0 bottom-0 w-full -z-10 origin-right" />
-            <DiagonalSVG />
-          </header>
-          {project.for && (
-            <h4 className="text-xs uppercase tracking-wider font-bold text-neutral-500">
-              <span className="text-grae mr-1">⁄⁄</span>
-              {project.for}
-            </h4>
-          )}
-          <div className="my-2 leading-snug">
-            {project.tagline ? (
-              <>
-                <span>{project.tagline}&nbsp;</span>
-                <span className="text-neutral-500 group-hover:text-white transition-colors duration-700">
-                  {project.description}
-                </span>
-              </>
-            ) : (
-              project.description
-            )}
-          </div>
-        </MotionLink>
-
-        <TechList items={project.tech} />
       </motion.div>
     </motion.div>
   )
@@ -259,7 +264,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
       </h1>
       <PreviewImageProvider>
         <motion.div
-          className="grid gap-8 pl-12"
+          className="grid gap-8"
           initial="initial"
           animate="animate"
           transition={{
