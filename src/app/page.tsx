@@ -18,7 +18,7 @@ export default function Home() {
       <div className="mb-24" />
       <Experience />
       <div className="mb-24" />
-      <div className="grid grid-cols-[1fr_auto] gap-16">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:gap-16">
         <GTImage />
         <div>
           <Education />

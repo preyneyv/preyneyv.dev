@@ -10,6 +10,9 @@ import { motion } from 'framer-motion'
 import data, { FeaturedProject } from '@/data/featured-projects'
 import Link from 'next/link'
 import ChevyButton from '@/ui/chevy-button'
+import { OverflowList } from 'react-overflow-list'
+import { useMedia } from 'react-use'
+import useCanHover from '@/hooks/use-can-hover'
 
 function StarburstSVG() {
   const h = 160
@@ -49,18 +52,28 @@ function StarburstSVG() {
   )
 }
 
-function ProjectCard({ project }: { project: FeaturedProject }) {
+function ProjectCard({
+  project,
+  canHover,
+}: {
+  project: FeaturedProject
+  canHover: boolean
+}) {
   // TODO: replace this with project slug when project pages are complete.
   const projectTarget = project.links[0].url
   return (
-    <motion.div className="relative" initial="initial" whileHover="hover">
+    <motion.div
+      className="relative"
+      initial="initial"
+      whileHover={canHover ? 'hover' : undefined}
+      animate={canHover ? undefined : 'hover'}
+    >
       <StarburstSVG />
       <MotionLink
         href={projectTarget}
         target="_blank"
-        className="flex flex-col"
+        className="flex flex-col h-full"
       >
-        <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
         <div className="relative pt-4 flex-1 flex flex-col">
           <motion.div
             variants={{
@@ -87,15 +100,18 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
               'absolute border-b-[1px] border-dark -left-[1em] bottom-0 pointer-events-none'
             )}
           />
-
+          <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
           <p className="text-lg leading-tight">{project.description}</p>
           <div className="flex-1" />
           <div className="mt-2">
-            <ul className="flex gap-6 text-sm text-bloo font-bold">
-              {project.tech.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
+            <OverflowList
+              minVisibleItems={0}
+              items={project.tech}
+              collapseFrom="end"
+              className="flex gap-4 md:gap-6 text-sm text-bloo font-bold whitespace-nowrap"
+              itemRenderer={(item, idx) => <span key={idx}>{item}</span>}
+              overflowRenderer={() => null}
+            />
           </div>
         </div>
       </MotionLink>
@@ -128,6 +144,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
 }
 
 export default function FeaturedProjects() {
+  const canHover = useCanHover()
   return (
     <section>
       <header className="flex justify-between">
@@ -139,9 +156,13 @@ export default function FeaturedProjects() {
         </Link>
       </header>
 
-      <motion.div className="grid grid-cols-3 gap-16 relative">
+      <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 relative">
         {data.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            canHover={canHover}
+          />
         ))}
         <svg
           className="w-screen absolute right-0 -scale-x-100 top-[1.5em] -z-10 pointer-events-none"

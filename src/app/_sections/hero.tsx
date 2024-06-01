@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { useRef } from 'react'
 import profesh from './assets/profesh.jpeg'
-import chinScratch from './assets/chin-scratch.gif'
 import Image from 'next/image'
 
 export default function Hero() {
@@ -74,10 +73,8 @@ export default function Hero() {
             priority
             placeholder="blur"
           />
-          <MotionImage
-            src={chinScratch}
-            alt="self-picture"
-            className="w-full absolute top-0 right-0"
+          <motion.div
+            className="w-full h-full absolute top-0 right-0"
             variants={{
               initial: {
                 opacity: 0,
@@ -86,7 +83,11 @@ export default function Hero() {
                 opacity: 1,
               },
             }}
-          />
+          >
+            <video muted autoPlay loop className="w-full h-full">
+              <source src="/chin-scratch.mp4" />
+            </video>
+          </motion.div>
         </motion.div>
       </motion.div>
       <motion.div
@@ -97,19 +98,19 @@ export default function Hero() {
         initial="initial"
         animate="animate"
       >
-        <motion.p className="mb-[1em]" variants={childVariants}>
+        <motion.p className="w-fit mb-[1em]" variants={childVariants}>
           Full-stack developer with a passion for
           <br />
           user experience and real-time systems.
         </motion.p>
-        <motion.p className="mb-[1em]" variants={childVariants}>
+        <motion.p className="w-fit mb-[1em]" variants={childVariants}>
           <Link href="https://results.worldskills.org/results?event=364&offset=0&skill=609&base_skill=127">
             WorldSkills 2019 Silver Medalist
             <br />
             in Web Technologies.
           </Link>
         </motion.p>
-        <motion.p variants={childVariants}>
+        <motion.p className="w-fit" variants={childVariants}>
           Currently transforming client
           <br />
           experiences at McKinsey Digital.

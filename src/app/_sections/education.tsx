@@ -5,14 +5,30 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import image from './assets/georgia-tech.jpeg'
 
 const courses = [
-  { number: 3451, course: 'Computer Graphics' },
-  { number: 3510, course: 'Design and Analysis of Algorithms' },
-  { number: 3600, course: 'Introduction to Artificial Intelligence' },
-  { number: 3630, course: 'Introduction to Robotics and Perception' },
-  { number: 4510, course: 'Automata and Complexity' },
-  { number: 4590, course: 'Computer Audio' },
-  { number: 4641, course: 'Machine Learning' },
-  { number: 4731, course: 'Game AI' },
+  { number: 3451, course: 'Computer Graphics', shortCourse: 'Comp. Graphics' },
+  {
+    number: 3510,
+    course: 'Design and Analysis of Algorithms',
+    shortCourse: 'Algorithm Design',
+  },
+  {
+    number: 3600,
+    course: 'Introduction to Artificial Intelligence',
+    shortCourse: 'Intro. AI',
+  },
+  {
+    number: 3630,
+    course: 'Introduction to Robotics and Perception',
+    shortCourse: 'Intro. Robotics',
+  },
+  {
+    number: 4510,
+    course: 'Automata and Complexity',
+    shortCourse: 'Automata and Complexity',
+  },
+  { number: 4590, course: 'Computer Audio', shortCourse: 'Computer Audio' },
+  { number: 4641, course: 'Machine Learning', shortCourse: 'Machine Learning' },
+  { number: 4731, course: 'Game AI', shortCourse: 'Game AI' },
 ]
 
 function useElementSize() {
@@ -83,10 +99,12 @@ export default function Education() {
       <SectionTitle>Education</SectionTitle>
       <div className="relative">
         <div className="relative">
-          <div className="absolute border-b-[1px] border-dark w-screen -left-16 top-[28px] -z-10" />
-          <h2 className="text-3xl font-bold">
-            Georgia Institute of Technology
-          </h2>
+          <div className="relative">
+            <h2 className="text-3xl font-bold leading-[1]">
+              Georgia Institute of Technology
+            </h2>
+            <div className="absolute border-b-[1px] border-dark w-screen -left-16 bottom-[0.3em] -z-10" />
+          </div>
           <div className="flex justify-between items-center">
             <h3 className="text-md">Bachelor of Science in Computer Science</h3>
             {/* <h3 className="text-right text-md leading-[0.8]">GPA: 3.94</h3> */}
@@ -104,7 +122,10 @@ export default function Education() {
           {courses.map((course, i) => (
             <li key={i} className="relative pt-2">
               <div className="relative flex overflow-x-clip">
-                <div className="bg-black">{course.course}</div>
+                <div className="bg-black hidden sm:block">{course.course}</div>
+                <div className="bg-black block sm:hidden">
+                  {course.shortCourse}
+                </div>
                 <div className="font-bold text-dark text-center absolute left-0 -z-10 w-full h-full ">
                   <TextMarquee text={`CS${course.number}`} />
                 </div>
@@ -125,7 +146,10 @@ export function GTImage() {
   })
 
   return (
-    <div className="relative -z-20 overflow-clip" ref={target}>
+    <div
+      className="relative -z-20 overflow-clip min-h-40 min-w-60"
+      ref={target}
+    >
       <motion.div className="absolute top-1/2 -translate-y-1/2 -z-60">
         <MotionImage
           src={image}

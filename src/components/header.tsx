@@ -181,7 +181,7 @@ export default function Header() {
   }
 
   const h1Style = {
-    fontSize: useTransform(p1, [0, 1], ['60px', '40px']),
+    transform: useMotionTemplate`scale(${useTransform(p1, [0, 1], [1, 0.67])})`,
   }
 
   return (
@@ -205,7 +205,7 @@ export default function Header() {
             <div className="flex justify-between w-full relative">
               <div className="relative select-none">
                 <motion.h1
-                  className="font-syne font-extrabold uppercase leading-[0.76]"
+                  className="font-syne font-extrabold uppercase !leading-[0.76] text-2xl md:text-5xl lg:text-[60px] origin-top-left"
                   style={h1Style}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

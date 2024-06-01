@@ -15,7 +15,7 @@ const ChevyButton = forwardRef<
       {...props}
       disabled={disabled ? true : undefined}
       className={clsx(
-        'disabled:opacity-20 transition-opacity text-sm uppercase flex items-center gap-2 text-bloo font-bold px-2',
+        'disabled:opacity-20 transition-opacity text-sm uppercase flex items-center gap-2 text-bloo font-bold pl-2',
         className
       )}
       initial="initial"
