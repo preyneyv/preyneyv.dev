@@ -1,11 +1,12 @@
 import { MotionPageTransition } from '@/components/custom-motion'
+import Footer from '@/components/footer/footer'
 import Header from '@/components/header'
+import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
-import Footer from '@/components/footer/footer'
-import { Analytics } from '@vercel/analytics/react'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -33,6 +34,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="!overflow-visible">
+      {process.env.UMAMI_TRACKING_ID && (
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={process.env.UMAMI_TRACKING_ID}
+        />
+      )}
       <body
         className={clsx(
           syne.variable,
