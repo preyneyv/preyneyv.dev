@@ -190,7 +190,7 @@ export default function Header() {
         type: 'tween',
       }}
     >
-      <div className="pb-72 relative pointer-events-none" ref={ref}>
+      <div className="pb-48 md:pb-72 relative pointer-events-none" ref={ref}>
         <motion.div
           className="bg-dark fixed top-0 border-l-[1px] border-l-dark -z-10"
           transition={{ duration: 1.4 }}
@@ -205,7 +205,7 @@ export default function Header() {
             <div className="flex justify-between w-full relative">
               <div className="relative select-none">
                 <motion.h1
-                  className="font-syne font-extrabold uppercase !leading-[0.76] text-2xl md:text-5xl lg:text-[60px] origin-top-left"
+                  className="font-syne font-extrabold uppercase !leading-[0.76] text-3xl md:text-5xl lg:text-[60px] origin-top-left"
                   style={h1Style}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -231,7 +231,7 @@ export default function Header() {
                 <HeaderAccent progress={p1} />
               </div>
               <motion.nav
-                className="flex flex-col text-right items-end uppercase text-[13px] justify-between font-bold pointer-events-auto"
+                className="flex flex-col text-right items-end uppercase text-[13px] justify-between font-bold pointer-events-auto absolute top-0 right-0"
                 initial={'initial'}
                 animate={'animate'}
                 variants={{
@@ -271,7 +271,7 @@ export default function Header() {
             >
               <motion.h3
                 style={{ opacity: useTransform(p1, [0, 1], [1, 0]) }}
-                className="text-2xl"
+                className="text-lg md:text-2xl"
               >
                 Software Engineer & Designer
               </motion.h3>

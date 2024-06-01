@@ -11,8 +11,7 @@ import data, { FeaturedProject } from '@/data/featured-projects'
 import Link from 'next/link'
 import ChevyButton from '@/ui/chevy-button'
 import { OverflowList } from 'react-overflow-list'
-import { useMedia } from 'react-use'
-import useCanHover from '@/hooks/use-can-hover'
+import { useCanHover } from '@/hooks/media-queries'
 
 function StarburstSVG() {
   const h = 160

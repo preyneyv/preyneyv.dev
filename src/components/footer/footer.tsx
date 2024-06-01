@@ -29,11 +29,11 @@ export default function Footer() {
   return (
     <footer className="h-64 border-t-[1px] border-dark w-full flex justify-center items-end relative overflow-clip">
       <div className="max-w-7xl px-9 w-screen">
-        <div className="w-full flex items-end justify-between">
-          <h1 className="font-syne font-extrabold uppercase text-xl">
+        <div className="w-full flex flex-col gap-2 sm:flex-row sm:items-end justify-between">
+          <h1 className="font-syne font-extrabold uppercase text-xl leading-[0.8]">
             <Link href="/">Pranav Nutalapati</Link>
           </h1>
-          <nav className="flex gap-6 uppercase font-bold text-sm">
+          <nav className="flex flex-wrap gap-x-6 gap-y-1 uppercase font-bold text-sm">
             <FooterLink href="/">Home</FooterLink>
             <FooterLink href="/projects">Projects</FooterLink>
             <FooterLink external href="/resume">

@@ -147,7 +147,7 @@ export default function Experience() {
                 transition: { delay: 0.7, duration: 0.3 },
               }}
               exit={{ opacity: 0, translateY: '0.2em' }}
-              className="text-xl max-w-4xl text-pretty [&_p]:mb-[1em]"
+              className="text-md sm:text-xl max-w-4xl sm:text-pretty [&_p]:mb-[1em]"
             >
               {active.description}
             </motion.div>

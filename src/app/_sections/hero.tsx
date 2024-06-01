@@ -6,6 +6,15 @@ import { useRef } from 'react'
 import profesh from './assets/profesh.jpeg'
 import Image from 'next/image'
 
+function ResponsiveBR() {
+  return (
+    <>
+      <br className="hidden sm:block" />
+      <span className="inline sm:hidden">&nbsp;</span>
+    </>
+  )
+}
+
 export default function Hero() {
   const isInitial = useIsInitialRender()
   const ref = useRef<HTMLDivElement>(null)
@@ -30,7 +39,7 @@ export default function Hero() {
   return (
     <div
       ref={ref}
-      className="text-3xl leading-none relative mb-32 flex flex-col justify-end"
+      className="text-2xl md:text-3xl leading-none relative mb-16 md:mb-32 flex flex-col justify-end"
       style={{
         height: `calc(100vh - 160px - 14rem)`,
         minHeight: '320px',
@@ -55,7 +64,7 @@ export default function Hero() {
       </motion.div>
       <motion.div className="absolute right-0 w-1/2 top-0 grayscale brightness-50">
         <motion.div
-          className="w-full -scale-x-100"
+          className="w-full -scale-x-100 aspect-square max-w-[50vh] absolute right-0"
           style={{
             clipPath: `polygon(
               50% 0,
@@ -84,7 +93,7 @@ export default function Hero() {
               },
             }}
           >
-            <video muted autoPlay loop className="w-full h-full">
+            <video muted autoPlay loop playsInline className="w-full h-full">
               <source src="/chin-scratch.mp4" />
             </video>
           </motion.div>
@@ -100,19 +109,19 @@ export default function Hero() {
       >
         <motion.p className="w-fit mb-[1em]" variants={childVariants}>
           Full-stack developer with a passion for
-          <br />
+          <ResponsiveBR />
           user experience and real-time systems.
         </motion.p>
         <motion.p className="w-fit mb-[1em]" variants={childVariants}>
           <Link href="https://results.worldskills.org/results?event=364&offset=0&skill=609&base_skill=127">
             WorldSkills 2019 Silver Medalist
-            <br />
+            <ResponsiveBR />
             in Web Technologies.
           </Link>
         </motion.p>
         <motion.p className="w-fit" variants={childVariants}>
           Currently transforming client
-          <br />
+          <ResponsiveBR />
           experiences at McKinsey Digital.
         </motion.p>
       </motion.div>

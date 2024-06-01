@@ -24,7 +24,7 @@ const courses = [
   {
     number: 4510,
     course: 'Automata and Complexity',
-    shortCourse: 'Automata and Complexity',
+    shortCourse: 'Automata & Complexity',
   },
   { number: 4590, course: 'Computer Audio', shortCourse: 'Computer Audio' },
   { number: 4641, course: 'Machine Learning', shortCourse: 'Machine Learning' },
@@ -103,11 +103,12 @@ export default function Education() {
             <h2 className="text-3xl font-bold leading-[1]">
               Georgia Institute of Technology
             </h2>
-            <div className="absolute border-b-[1px] border-dark w-screen -left-16 bottom-[0.3em] -z-10" />
+            <div className="absolute border-b-[1px] border-dark w-screen sm:-left-16 bottom-[0.3em] -z-10" />
           </div>
           <div className="flex justify-between items-center">
-            <h3 className="text-md">Bachelor of Science in Computer Science</h3>
-            {/* <h3 className="text-right text-md leading-[0.8]">GPA: 3.94</h3> */}
+            <h3 className="text-md leading-[1] mt-1">
+              Bachelor of Science in Computer Science
+            </h3>
           </div>
           <div className="flex text-xs uppercase font-bold leading-none items-center">
             <h3 className="text-bloo">Aug 2020 &mdash; Dec 2022</h3>
@@ -147,19 +148,19 @@ export function GTImage() {
 
   return (
     <div
-      className="relative -z-20 overflow-clip min-h-40 min-w-60"
+      className="relative -z-20 overflow-clip min-h-[50vw] md:min-h-0 min-w-9 md:min-w-60"
       ref={target}
     >
-      <motion.div className="absolute top-1/2 -translate-y-1/2 -z-60">
+      <motion.div className="absolute top-1/2 -z-60 h-full">
         <MotionImage
           src={image}
           alt="Me after graduation"
-          className="block"
+          className="block min-h-[140%] object-cover object-[18%_50%]"
           style={{
             translateY: useTransform(
               scroll.scrollYProgress,
               [-0.4, 1],
-              ['-20%', '20%']
+              ['-80%', '-40%']
             ),
           }}
         />
