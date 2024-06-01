@@ -1,7 +1,6 @@
 import { MotionPageTransition } from '@/components/custom-motion'
 import Footer from '@/components/footer/footer'
 import Header from '@/components/header'
-import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Syne } from 'next/font/google'
@@ -57,7 +56,6 @@ export default function RootLayout({
             <Footer />
           </main>
         </div>
-        <Analytics />
       </body>
     </html>
   )
