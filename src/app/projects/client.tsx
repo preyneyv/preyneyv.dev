@@ -10,6 +10,7 @@ import ProjectList from './list'
 import GlitchCanvas from '@/components/glitchy-canvas'
 import { motion } from 'framer-motion'
 import { useIsInitialRender } from '@/components/custom-motion'
+import clsx from 'clsx'
 
 export default function ProjectView({
   projects: allProjects,
@@ -46,14 +47,16 @@ export default function ProjectView({
   }, [allProjects, selectedTech, selectedOrgs])
 
   return (
-    <div className="grid grid-cols-[250px_2fr] gap-16">
+    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] lg:gap-16">
       <div>
         <aside
-          className="sticky top-32 border-dark flex flex-col justify-between"
-          style={{
-            height: `calc(100vh - 256px)`,
-          }}
+          className={clsx(
+            'flex flex-col justify-between bg-black/90 backdrop-blur-md z-50',
+            'fixed hidden left-0 top-0 w-[350px] max-w-[100vw] h-full px-9 py-8 border-r-[1px] border-dark',
+            'lg:sticky lg:top-32 lg:h-[calc(100vh_-_256px)] lg:px-0 lg:w-auto lg:border-r-0 lg:bg-transparent lg:backdrop-blur-0'
+          )}
         >
+          <div className="border-l-[1px] border-dark absolute left-9 top-0 h-screen" />
           <section>
             <SectionTitle>Filters</SectionTitle>
 
@@ -85,7 +88,7 @@ export default function ProjectView({
             </p>
           </section>
           <motion.div
-            className="w-24 ml-[1px] sticky bottom-32"
+            className="w-24 ml-[1px] sticky bottom-0 lg:bottom-32"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.2 }}
             transition={{ delay: isInitial ? 2 : 0, duration: 1 }}

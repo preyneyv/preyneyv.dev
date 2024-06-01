@@ -1,9 +1,9 @@
 'use client'
 
-import { useHover } from 'react-use'
 import { MotionLink, useIsInitialRender } from '@/components/custom-motion'
 import { colors } from '@/constants'
 import { Project } from '@/data/projects'
+import { useCanHover } from '@/hooks/media-queries'
 import IconButton from '@/ui/icon-button'
 import {
   Catalog,
@@ -13,7 +13,7 @@ import {
   Search,
   Video,
 } from '@carbon/icons-react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { OverflowList } from 'react-overflow-list'
 import PreviewImageProvider, { usePreviewImage } from './preview'
 
@@ -25,11 +25,11 @@ const DiagonalSVG = () => {
   }
   return (
     <svg
-      className="absolute right-0 top-0 pointer-events-none -z-10"
+      className="absolute right-0 bottom-0 pointer-events-none -z-10"
       style={{
         height: 10000,
         width: '100vw',
-        transform: `translate(100%, -100%) translate(0, 20px) scaleY(-100%)`,
+        transform: `translate(100%, 0) translate(-0.5px, 0) scaleY(-100%)`,
       }}
     >
       <motion.path
@@ -95,7 +95,13 @@ function TechList({ items }: { items: string[] }) {
   )
 }
 
-function ProjectListItem({ project }: { project: Project }) {
+function ProjectListItem({
+  project,
+  canHover,
+}: {
+  project: Project
+  canHover: boolean
+}) {
   const previewImage = usePreviewImage(project)
 
   // TODO: replace this with project slug when pages are implemented.
@@ -113,12 +119,12 @@ function ProjectListItem({ project }: { project: Project }) {
       transition={{ duration: 1 }}
     >
       <motion.div
-        whileHover="hover"
+        whileHover={canHover ? 'hover' : undefined}
+        animate={canHover ? undefined : 'hover'}
         initial="initial"
         onHoverStart={previewImage.onHoverStart}
         onHoverEnd={previewImage.onHoverEnd}
       >
-        <div className="border-b-[1px] border-b-dark -mt-[4px] absolute right-0 top-[24px] w-full -z-10 origin-right" />
         <motion.div
           className="border-l-[1px] border-l-dark absolute -left-[1px]  h-full -z-10 origin-top"
           variants={{
@@ -129,7 +135,6 @@ function ProjectListItem({ project }: { project: Project }) {
           }}
           transition={{ duration: 0.3, type: 'tween' }}
         />
-        <DiagonalSVG />
         <motion.ul
           className="flex flex-col gap-0 absolute -left-10 -top-[6px] h-full"
           variants={{
@@ -170,10 +175,12 @@ function ProjectListItem({ project }: { project: Project }) {
           ))}
         </motion.ul>
         <MotionLink href={projectTarget} target="_blank" className="mb-1 block">
-          <header className="flex justify-between">
+          <header className="flex justify-between relative">
             <h2 className="text-2xl font-bold group-hover:font-extrabold transition-[font-weight] leading-none">
               {project.name}
             </h2>
+            <div className="border-b-[1px] border-b-dark -mt-[4px] absolute right-0 bottom-0 w-full -z-10 origin-right" />
+            <DiagonalSVG />
           </header>
           {project.for && (
             <h4 className="text-xs uppercase tracking-wider font-bold text-neutral-500">
@@ -244,6 +251,7 @@ function ProjectSearch() {
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
   const isInitial = useIsInitialRender()
+  const canHover = useCanHover()
   return (
     <div style={{ containerType: 'inline-size' }}>
       <h1 className="font-syne font-extrabold uppercase text-[8cqw] -mt-[0.37em]">
@@ -251,7 +259,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
       </h1>
       <PreviewImageProvider>
         <motion.div
-          className="grid gap-8"
+          className="grid gap-8 pl-12"
           initial="initial"
           animate="animate"
           transition={{
@@ -260,7 +268,11 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
           }}
         >
           {projects.map((project) => (
-            <ProjectListItem key={project.slug} project={project} />
+            <ProjectListItem
+              key={project.slug}
+              project={project}
+              canHover={canHover}
+            />
           ))}
         </motion.div>
       </PreviewImageProvider>

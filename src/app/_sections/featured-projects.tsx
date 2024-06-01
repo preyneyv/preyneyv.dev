@@ -100,7 +100,9 @@ function ProjectCard({
             )}
           />
           <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
-          <p className="text-lg leading-tight">{project.description}</p>
+          <p className="text-lg sm:text-md md:text-lg !leading-tight">
+            {project.description}
+          </p>
           <div className="flex-1" />
           <div className="mt-2">
             <OverflowList
