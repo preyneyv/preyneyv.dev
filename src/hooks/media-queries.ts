@@ -7,6 +7,9 @@ export function useCanHover() {
   return useMedia('(hover: hover)', true)
 }
 
-export function isSizeSM() {
-  // return useMedia('(min-width:')
+/**
+ * Determines whether the current screen is large.
+ */
+export function useIsSizeLG() {
+  return useMedia('(min-width: 1024px)', true)
 }

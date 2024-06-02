@@ -11,12 +11,14 @@ import GlitchCanvas from '@/components/glitchy-canvas'
 import { motion } from 'framer-motion'
 import { useIsInitialRender } from '@/components/custom-motion'
 import clsx from 'clsx'
+import { useIsSizeLG } from '@/hooks/media-queries'
 
 export default function ProjectView({
   projects: allProjects,
 }: {
   projects: Project[]
 }) {
+  const isLarge = useIsSizeLG()
   const isInitial = useIsInitialRender()
 
   const allTech = useMemo(
@@ -51,12 +53,12 @@ export default function ProjectView({
       <div>
         <aside
           className={clsx(
-            'flex flex-col justify-between bg-black/90 backdrop-blur-md z-50',
-            'fixed hidden left-0 top-0 w-[350px] max-w-[100vw] h-full px-9 py-8 border-r-[1px] border-dark',
+            'hidden lg:flex flex-col justify-between bg-black/90 backdrop-blur-md z-50',
+            'fixed left-0 top-0 w-[350px] max-w-[100vw] h-full px-9 py-8 border-r-[1px] border-dark',
             'lg:sticky lg:top-32 lg:h-[calc(100vh_-_256px)] lg:px-0 lg:w-auto lg:border-r-0 lg:bg-transparent lg:backdrop-blur-0'
           )}
         >
-          <div className="border-l-[1px] border-dark absolute left-9 top-0 h-screen" />
+          <div className="border-l-[1px] border-dark absolute left-9 top-0 h-screen block lg:hidden" />
           <section>
             <SectionTitle>Filters</SectionTitle>
 
@@ -97,7 +99,7 @@ export default function ProjectView({
           </motion.div>
         </aside>
       </div>
-      <ProjectList projects={filteredProjects} />
+      <ProjectList projects={isLarge ? filteredProjects : allProjects} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { Project } from '../projects'
+import previewImage from '../../../public/previews/code-dumper.png'
 
 export default {
   name: 'Code Dumper',
@@ -12,4 +13,8 @@ export default {
       Parses Python AST and recursively builds a per-statement dependency tree.
     </>
   ),
+  previewImage: {
+    type: 'image',
+    src: previewImage,
+  },
 } satisfies Project

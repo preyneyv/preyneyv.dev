@@ -30,7 +30,7 @@ const DiagonalSVG = () => {
       style={{
         height: 10000,
         width: '100vw',
-        transform: `translate(100%, 0) translate(-0.5px, 0) scaleY(-100%)`,
+        transform: `translate(100%, 0) translate(-0.5px, -3px) scaleY(-100%)`,
       }}
     >
       <motion.path
@@ -86,7 +86,7 @@ const TechListOverflow = (items: string[]) => {
 function TechList({ items }: { items: string[] }) {
   return (
     <OverflowList
-      className="text-sm items-center whitespace-nowrap"
+      className="text-sm items-center whitespace-nowrap leading-none"
       collapseFrom="end"
       minVisibleItems={0}
       items={items}

@@ -219,14 +219,18 @@ export default function Header() {
                       <AEYAnim progress={p2} />
                       <span>v</span>
                     </motion.span>
+                    <br />
+                    <motion.span
+                      style={{
+                        opacity: useTransform(p1, [0, 1], [1, 0]),
+                        display: useTransform(p1, (v) =>
+                          v === 1 ? 'none' : 'block'
+                        ),
+                      }}
+                    >
+                      Nutalapati
+                    </motion.span>
                   </Link>
-                  <br />
-                  <motion.span
-                    className="block"
-                    style={{ opacity: useTransform(p1, [0, 1], [1, 0]) }}
-                  >
-                    Nutalapati
-                  </motion.span>
                 </motion.h1>
                 <HeaderAccent progress={p1} />
               </div>

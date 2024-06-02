@@ -34,10 +34,13 @@ function StarburstSVG() {
         <motion.path
           d={`M${w},${-w} L${-w},${w}`}
           {...pathProps}
-          variants={{
-            initial: { pathLength: 0 },
-            hover: { pathLength: 1 },
-          }}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+
+          // variants={{
+          //   initial: { pathLength: 0 },
+          //   hover: { pathLength: 1 },
+          // }}
         />
         <motion.path
           d={`M0,0 L10000,10000`}
@@ -74,12 +77,6 @@ function ProjectCard({
       >
         <div className="relative flex-1 flex flex-col">
           <motion.div
-            variants={{
-              initial: { transform: `scaleY(0%)` },
-              hover: {
-                transform: `scaleY(100%)`,
-              },
-            }}
             className={clsx(
               'absolute border-dark left-0 top-0 origin-top-left w-full h-full pointer-events-none border-l-[1px]'
             )}
@@ -87,15 +84,10 @@ function ProjectCard({
           <motion.div
             variants={{
               initial: { transform: `scaleX(0%)` },
-              hover: {
-                transform: `scaleX(100%)`,
-                transition: {
-                  delay: 0.3,
-                },
-              },
+              hover: { transform: `scaleX(100%)` },
             }}
             className={clsx(
-              'absolute border-b-[1px] border-dark w-full bottom-0 origin-left pointer-events-none'
+              'absolute border-b-[1px] border-dark w-full bottom-0 origin-left pointer-events-none -z-10'
             )}
           />
           <header className="relative">
@@ -112,7 +104,7 @@ function ProjectCard({
               minVisibleItems={0}
               items={project.tech}
               collapseFrom="end"
-              className="flex gap-4 md:gap-6 text-sm text-bloo font-bold whitespace-nowrap"
+              className="flex gap-4 md:gap-6 text-sm text-bloo font-bold whitespace-nowrap leading-none"
               itemRenderer={(item, idx) => <span key={idx}>{item}</span>}
               overflowRenderer={() => null}
             />
@@ -128,7 +120,7 @@ function ProjectCard({
               hover: {
                 translateX: 0,
                 opacity: 1,
-                transition: { delay: 0.5, duration: 0.2 },
+                transition: { delay: 0.3, duration: 0.2 },
               },
             }}
           >

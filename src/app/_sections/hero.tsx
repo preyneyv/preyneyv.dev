@@ -62,7 +62,12 @@ export default function Hero() {
           <GlitchCanvas />
         </motion.div>
       </motion.div>
-      <motion.div className="absolute right-0 w-1/2 top-0 grayscale brightness-50">
+      <motion.div
+        className="absolute right-0 w-1/2 top-0 grayscale brightness-50"
+        initial={{ opacity: 0, transform: 'translateY(20px)' }}
+        animate={{ opacity: 1, transform: 'translateY(0)' }}
+        transition={{ delay: isInitial ? 2 : 0, duration: 1 }}
+      >
         <motion.div
           className="w-full -scale-x-100 aspect-square max-w-[50vh] absolute right-0"
           style={{
