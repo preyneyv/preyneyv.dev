@@ -14,7 +14,7 @@ export type Experience = {
 export default [
   {
     company: 'McKinsey Digital',
-    role: 'Engineer II',
+    role: 'Senior Engineer I',
     type: 'Full-Time',
     start: 'Mar 2023',
     end: 'Now',

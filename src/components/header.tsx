@@ -255,6 +255,9 @@ export default function Header() {
                 <NavLink newTab href="/github">
                   GitHub
                 </NavLink>
+                <NavLink newTab href="//blog.preyneyv.dev">
+                  Blog
+                </NavLink>
               </motion.nav>
 
               <motion.div
