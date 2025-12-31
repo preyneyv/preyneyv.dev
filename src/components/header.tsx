@@ -280,7 +280,7 @@ export default function Header() {
                 style={{ opacity: useTransform(p1, [0, 1], [1, 0]) }}
                 className="text-lg md:text-2xl"
               >
-                Software Engineer & Designer
+                Software Engineer
               </motion.h3>
             </motion.div>
           </motion.div>

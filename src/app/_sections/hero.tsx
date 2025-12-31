@@ -113,9 +113,9 @@ export default function Hero() {
         animate="animate"
       >
         <motion.p className="w-fit mb-[1em]" variants={childVariants}>
-          Full-stack developer with a passion for
+          Computer scientist with a passion for
           <ResponsiveBR />
-          user experience and real-time systems.
+          cool tech and user experience.
         </motion.p>
         <motion.p className="w-fit mb-[1em]" variants={childVariants}>
           <Link href="https://results.worldskills.org/results?event=364&offset=0&skill=609&base_skill=127">
@@ -125,9 +125,9 @@ export default function Hero() {
           </Link>
         </motion.p>
         <motion.p className="w-fit" variants={childVariants}>
-          Currently transforming client
+          Currently studying AI and Visual Computing
           <ResponsiveBR />
-          experiences at McKinsey Digital.
+          at the University of California, Berkeley.
         </motion.p>
       </motion.div>
     </div>

@@ -17,7 +17,7 @@ export default [
     role: 'Senior Engineer I',
     type: 'Full-Time',
     start: 'Mar 2023',
-    end: 'Now',
+    end: 'Jun 2025',
     location: 'Raliegh, NC',
     description: (
       <>
