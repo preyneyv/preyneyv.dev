@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { MotionLink, useIsInitialRender } from '@/components/custom-motion'
-import { colors } from '@/constants'
-import { Project } from '@/data/projects'
-import { useCanHover } from '@/hooks/media-queries'
-import IconButton from '@/ui/icon-button'
+import { MotionLink, useIsInitialRender } from "@/components/custom-motion";
+import { colors } from "@/constants";
+import { Project } from "@/data/projects";
+import { useCanHover } from "@/hooks/media-queries";
+import IconButton from "@/ui/icon-button";
 import {
   Catalog,
   Launch,
@@ -12,24 +12,24 @@ import {
   OverflowMenuHorizontal,
   Search,
   Video,
-} from '@carbon/icons-react'
-import { motion } from 'framer-motion'
-import { OverflowList } from 'react-overflow-list'
-import PreviewImageProvider, { usePreviewImage } from './preview'
-import clsx from 'clsx'
+} from "@carbon/icons-react";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { OverflowList } from "react-overflow-list";
+import PreviewImageProvider, { usePreviewImage } from "./preview";
 
 const DiagonalSVG = () => {
   const pathProps = {
-    fill: 'none',
+    fill: "none",
     stroke: colors.dark,
     strokeWidth: 1,
-  }
+  };
   return (
     <svg
       className="absolute right-0 bottom-0 pointer-events-none -z-10"
       style={{
         height: 10000,
-        width: '100vw',
+        width: "100vw",
         transform: `translate(100%, 0) translate(-0.5px, -3px) scaleY(-100%)`,
       }}
     >
@@ -42,16 +42,16 @@ const DiagonalSVG = () => {
         }}
       />
     </svg>
-  )
-}
+  );
+};
 
 const TechListItem = (item: string, idx: number) => {
   return (
     <span className="mr-4 text-bloo font-bold" key={idx}>
       {item}
     </span>
-  )
-}
+  );
+};
 const TechListOverflow = (items: string[]) => {
   return (
     <>
@@ -62,8 +62,8 @@ const TechListOverflow = (items: string[]) => {
           <motion.div
             className="absolute right-0 bottom-0 whitespace-nowrap translate-y-full"
             variants={{
-              initial: { pointerEvents: 'none' },
-              hover: { pointerEvents: 'auto' },
+              initial: { pointerEvents: "none" },
+              hover: { pointerEvents: "auto" },
             }}
           >
             <motion.ul
@@ -81,8 +81,8 @@ const TechListOverflow = (items: string[]) => {
         </span>
       </motion.div>
     </>
-  )
-}
+  );
+};
 function TechList({ items }: { items: string[] }) {
   return (
     <OverflowList
@@ -93,20 +93,20 @@ function TechList({ items }: { items: string[] }) {
       itemRenderer={TechListItem}
       overflowRenderer={TechListOverflow}
     />
-  )
+  );
 }
 
 function ProjectListItem({
   project,
   canHover,
 }: {
-  project: Project
-  canHover: boolean
+  project: Project;
+  canHover: boolean;
 }) {
-  const previewImage = usePreviewImage(project)
+  const previewImage = usePreviewImage(project);
 
   // TODO: replace this with project slug when pages are implemented.
-  const projectTarget = project.links[0].url
+  const projectTarget = project.links[0].url;
 
   return (
     <motion.div
@@ -120,8 +120,8 @@ function ProjectListItem({
       transition={{ duration: 1 }}
     >
       <motion.div
-        whileHover={canHover ? 'hover' : undefined}
-        animate={canHover ? undefined : 'hover'}
+        whileHover={canHover ? "hover" : undefined}
+        animate={canHover ? undefined : "hover"}
         initial="initial"
         onHoverStart={previewImage.onHoverStart}
         onHoverEnd={previewImage.onHoverEnd}
@@ -134,19 +134,17 @@ function ProjectListItem({
               scaleY: 1,
             },
           }}
-          transition={{ duration: 0.3, type: 'tween' }}
+          transition={{ duration: 0.3, type: "tween" }}
         />
         <MotionLink href={projectTarget} target="_blank" className="mb-1 block">
           <header className="flex justify-between relative">
-            <h2 className="text-2xl font-bold group-hover:font-extrabold transition-[font-weight] leading-none">
-              {project.name}
-            </h2>
+            <h2 className="text-2xl font-bold leading-none">{project.name}</h2>
             <div className="border-b-[1px] border-b-dark absolute right-0 bottom-[3px] w-full -z-10 origin-right" />
             <DiagonalSVG />
           </header>
           {project.for && (
             <h4 className="text-xs uppercase tracking-wider font-bold text-neutral-500">
-              <span className="text-grae mr-1">⁄⁄</span>
+              <span className="text-grae mr-1">///</span>
               {project.for}
             </h4>
           )}
@@ -168,13 +166,13 @@ function ProjectListItem({
 
         <motion.ul
           className={clsx(
-            'flex gap-0 border-t-[1px] border-dark justify-end',
-            'lg:flex-col lg:absolute lg:-left-10 lg:-top-[6px] lg:h-full lg:justify-start lg:border-t-0'
+            "flex gap-0 border-t-[1px] border-dark justify-end",
+            "lg:flex-col lg:absolute lg:-left-10 lg:-top-[6px] lg:h-full lg:justify-start lg:border-t-0",
           )}
           variants={{
             hover: {
               transition: {
-                when: 'beforeChildren',
+                when: "beforeChildren",
                 staggerChildren: 0.3,
               },
             },
@@ -185,7 +183,7 @@ function ProjectListItem({
               key={link.type}
               style={{ translateX: 0 }}
               variants={{
-                initial: { translateX: '5%', opacity: 0 },
+                initial: { translateX: "5%", opacity: 0 },
                 hover: {
                   translateX: 0,
                   opacity: 1,
@@ -200,22 +198,22 @@ function ProjectListItem({
                 target="_blank"
                 className="p-2 block text-neutral-600 hover:text-white transition-colors duration-700"
               >
-                {link.type === 'github' && <LogoGithub size={20} />}
-                {link.type === 'external' && <Launch size={20} />}
-                {link.type === 'article' && <Catalog size={20} />}
-                {link.type === 'video' && <Video size={20} />}
+                {link.type === "github" && <LogoGithub size={20} />}
+                {link.type === "external" && <Launch size={20} />}
+                {link.type === "article" && <Catalog size={20} />}
+                {link.type === "video" && <Video size={20} />}
               </MotionLink>
             </motion.li>
           ))}
         </motion.ul>
       </motion.div>
     </motion.div>
-  )
+  );
 }
 
 // TODO: implement project search
 function ProjectSearch() {
-  const isInitial = useIsInitialRender()
+  const isInitial = useIsInitialRender();
   return (
     <motion.header
       className="flex mb-8 bg-black"
@@ -251,14 +249,14 @@ function ProjectSearch() {
         <Search size={28} />
       </IconButton>
     </motion.header>
-  )
+  );
 }
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
-  const isInitial = useIsInitialRender()
-  const canHover = useCanHover()
+  const isInitial = useIsInitialRender();
+  const canHover = useCanHover();
   return (
-    <div style={{ containerType: 'inline-size' }}>
+    <div style={{ containerType: "inline-size" }}>
       <h1 className="font-syne font-extrabold uppercase text-[8cqw] -mt-[0.37em]">
         Projects
       </h1>
@@ -282,5 +280,5 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
         </motion.div>
       </PreviewImageProvider>
     </div>
-  )
+  );
 }

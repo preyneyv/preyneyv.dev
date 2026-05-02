@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { colors } from '@/constants'
+import { colors } from "@/constants";
 import {
   MotionConfig,
   MotionValue,
@@ -12,57 +12,57 @@ import {
   useMotionValueEvent,
   useScroll,
   useTransform,
-} from 'framer-motion'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { ReactNode, useRef } from 'react'
+} from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactNode, useRef } from "react";
 
 function AEYAnim({
   progress: rawProgress,
   isFirst,
 }: {
-  progress: MotionValue<number>
-  isFirst?: boolean
+  progress: MotionValue<number>;
+  isFirst?: boolean;
 }) {
-  const progress = useMotionValue(0)
-  const animDirection = useRef(0)
+  const progress = useMotionValue(0);
+  const animDirection = useRef(0);
 
-  useMotionValueEvent(rawProgress, 'change', (v) => {
+  useMotionValueEvent(rawProgress, "change", (v) => {
     if (v === 0) {
       if (animDirection.current !== -1) {
-        animate(progress, 0, { velocity: 0.3, ease: 'circInOut' })
-        animDirection.current = -1
+        animate(progress, 0, { velocity: 0.3, ease: "circInOut" });
+        animDirection.current = -1;
       }
     } else {
       if (animDirection.current !== 1) {
-        animate(progress, 1, { velocity: 0.3, ease: 'circInOut', delay: 0.3 })
-        animDirection.current = 1
+        animate(progress, 1, { velocity: 0.3, ease: "circInOut", delay: 0.3 });
+        animDirection.current = 1;
       }
     }
-  })
+  });
 
-  const overlap = 0.4
+  const overlap = 0.4;
   const nameAStyle = {
     opacity: useTransform(progress, [0, 1 - overlap], [1, 0]),
     transform: useMotionTemplate`translateY(${useTransform(
       progress,
       [0, 1 - overlap],
-      [0, -0.4]
+      [0, -0.4],
     )}em)`,
-  }
+  };
   const nameEYStyle = {
     width: useTransform(
       progress,
       [0, 1],
-      isFirst ? ['1.17em', '2.22em'] : ['0.96em', '2.3em']
+      isFirst ? ["1.17em", "2.22em"] : ["0.96em", "2.3em"],
     ),
     opacity: useTransform(progress, [overlap, 1], [0, 1]),
     transform: useMotionTemplate`translateY(${useTransform(
       progress,
       [overlap, 1],
-      [0.4, 0]
+      [0.4, 0],
     )}em)`,
-  }
+  };
   return (
     <span className="relative inline-flex">
       <motion.span style={nameAStyle} className="absolute">
@@ -72,11 +72,11 @@ function AEYAnim({
         ey
       </motion.span>
     </span>
-  )
+  );
 }
 
 function HeaderAccent({ progress }: { progress: MotionValue<number> }) {
-  const height = 200
+  const height = 200;
   return (
     <motion.svg
       className="absolute w-screen right-0 bottom-0 -z-10 pointer-events-none"
@@ -96,26 +96,26 @@ function HeaderAccent({ progress }: { progress: MotionValue<number> }) {
         fill="transparent"
       />
     </motion.svg>
-  )
+  );
 }
 
-const MotionLink = motion(Link)
+const MotionLink = motion(Link);
 function NavLink({
   href,
   children,
   newTab,
 }: {
-  href: string
-  children?: ReactNode
-  newTab?: boolean
+  href: string;
+  children?: ReactNode;
+  newTab?: boolean;
 }) {
-  const path = usePathname()
-  const isActive = path === href
+  const path = usePathname();
+  const isActive = path === href;
   return (
     <motion.div
       className="-mb-1"
       variants={{
-        initial: { opacity: 0, translateY: '2em' },
+        initial: { opacity: 0, translateY: "2em" },
         animate: {
           opacity: 1,
           translateY: 0,
@@ -127,16 +127,16 @@ function NavLink({
         href={href}
         scroll={false}
         className="w-28 overflow-clip text-right block"
-        whileHover={'hover'}
-        animate={isActive ? ['hover', 'active'] : undefined}
-        target={newTab ? '_blank' : undefined}
+        whileHover={"hover"}
+        animate={isActive ? ["hover", "active"] : undefined}
+        target={newTab ? "_blank" : undefined}
       >
         <motion.div
           className="relative block"
           initial={{ translateX: 0 }}
           variants={{
             hover: {
-              translateX: '-1.8em',
+              translateX: "-1.8em",
             },
             active: {
               color: colors.bloo,
@@ -145,49 +145,49 @@ function NavLink({
         >
           {children}
           <span className="text-grae absolute -right-1 top-0 translate-x-full block">
-            ⁄⁄
+            {/* ⁄⁄ */}///
           </span>
         </motion.div>
       </MotionLink>
     </motion.div>
-  )
+  );
 }
 
 export default function Header() {
-  const ref = useRef(null)
+  const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
-  })
+    offset: ["start start", "end start"],
+  });
 
-  const progress = scrollYProgress
+  const progress = scrollYProgress;
 
-  const midpoint = 0.5
+  const midpoint = 0.5;
   const p1 = useTransform(
     useTransform(progress, [0, midpoint], [0, 1]),
-    easeInOut
-  )
+    easeInOut,
+  );
   const p2 = useTransform(
     useTransform(progress, [midpoint, 1], [0, 1]),
-    easeInOut
-  )
+    easeInOut,
+  );
 
   const headerStyle = {
     transform: useMotionTemplate`translateY(${useTransform(
       p1,
       [0, 1],
-      [0, -48]
+      [0, -48],
     )}px)`,
-  }
+  };
 
   const h1Style = {
     transform: useMotionTemplate`scale(${useTransform(p1, [0, 1], [1, 0.67])})`,
-  }
+  };
 
   return (
     <MotionConfig
       transition={{
-        type: 'tween',
+        type: "tween",
       }}
     >
       <div className="pb-48 md:pb-72 relative pointer-events-none" ref={ref}>
@@ -224,7 +224,7 @@ export default function Header() {
                       style={{
                         opacity: useTransform(p1, [0, 1], [1, 0]),
                         display: useTransform(p1, (v) =>
-                          v === 1 ? 'none' : 'block'
+                          v === 1 ? "none" : "block",
                         ),
                       }}
                     >
@@ -236,8 +236,8 @@ export default function Header() {
               </div>
               <motion.nav
                 className="flex flex-col text-right items-end uppercase text-[13px] justify-between font-bold pointer-events-auto absolute top-0 right-0"
-                initial={'initial'}
-                animate={'animate'}
+                initial={"initial"}
+                animate={"animate"}
                 variants={{
                   animate: {
                     transition: {
@@ -264,16 +264,16 @@ export default function Header() {
                 className="bg-dark absolute right-0 border-r-[1px] border-r-dark -z-10 h-screen origin-bottom"
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 1 }}
-                transition={{ delay: 0.5, type: 'keyframes', duration: 0.8 }}
+                transition={{ delay: 0.5, type: "keyframes", duration: 0.8 }}
               />
             </div>
             <motion.div
               initial={{
-                translateY: '0.2em',
+                translateY: "0.2em",
                 opacity: 0,
-                pointerEvents: 'auto',
+                pointerEvents: "auto",
               }}
-              animate={{ translateY: 0, opacity: 1, pointerEvents: 'none' }}
+              animate={{ translateY: 0, opacity: 1, pointerEvents: "none" }}
               transition={{ duration: 0.5, delay: 1 }}
             >
               <motion.h3
@@ -287,5 +287,5 @@ export default function Header() {
         </motion.header>
       </div>
     </MotionConfig>
-  )
+  );
 }

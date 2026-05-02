@@ -1,10 +1,10 @@
-import { MotionImage, useIsInitialRender } from '@/components/custom-motion'
-import GlitchCanvas from '@/components/glitchy-canvas'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import Link from 'next/link'
-import { useRef } from 'react'
-import profesh from './assets/profesh.jpeg'
-import Image from 'next/image'
+import { useIsInitialRender } from "@/components/custom-motion";
+import GlitchCanvas from "@/components/glitchy-canvas";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
+import profesh from "./assets/profesh.jpeg";
 
 function ResponsiveBR() {
   return (
@@ -12,21 +12,21 @@ function ResponsiveBR() {
       <br className="hidden sm:block" />
       <span className="inline sm:hidden">&nbsp;</span>
     </>
-  )
+  );
 }
 
 export default function Hero() {
-  const isInitial = useIsInitialRender()
-  const ref = useRef<HTMLDivElement>(null)
+  const isInitial = useIsInitialRender();
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
-  })
+    offset: ["start start", "end start"],
+  });
 
   const childVariants = {
     initial: {
       opacity: 0,
-      translateY: '1em',
+      translateY: "1em",
     },
     animate: {
       opacity: 1,
@@ -35,15 +35,15 @@ export default function Hero() {
         duration: 1,
       },
     },
-  }
+  };
   return (
     <div
       ref={ref}
       className="text-2xl md:text-3xl leading-none relative mb-16 md:mb-32 flex flex-col justify-end"
       style={{
         height: `calc(100vh - 160px - 14rem)`,
-        minHeight: '320px',
-        maxHeight: '80vw',
+        minHeight: "320px",
+        maxHeight: "80vw",
       }}
     >
       <motion.div
@@ -64,8 +64,8 @@ export default function Hero() {
       </motion.div>
       <motion.div
         className="absolute right-0 w-1/2 top-0 grayscale brightness-50"
-        initial={{ opacity: 0, transform: 'translateY(20px)' }}
-        animate={{ opacity: 1, transform: 'translateY(0)' }}
+        initial={{ opacity: 0, transform: "translateY(20px)" }}
+        animate={{ opacity: 1, transform: "translateY(0)" }}
         transition={{ delay: isInitial ? 2 : 0, duration: 1 }}
       >
         <motion.div
@@ -83,7 +83,7 @@ export default function Hero() {
           <Image
             src={profesh}
             alt="self-picture"
-            className="w-full"
+            className="w-full -scale-x-100"
             priority
             placeholder="blur"
           />
@@ -131,5 +131,5 @@ export default function Hero() {
         </motion.p>
       </motion.div>
     </div>
-  )
+  );
 }

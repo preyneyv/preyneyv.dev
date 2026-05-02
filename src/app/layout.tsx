@@ -3,7 +3,7 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header";
 import clsx from "clsx";
 import type { Metadata } from "next";
-import { Space_Grotesk, Syne } from "next/font/google";
+import { Figtree, Syne } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -13,7 +13,7 @@ const syne = Syne({
   variable: "--font-syne",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const figtree = Figtree({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-space-grotesk",
@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: {
     default: "Pranav Nutalapati",
-    template: "%s ⁄⁄ Pranav Nutalapati",
+    template: "%s / Pranav Nutalapati",
   },
   description:
     "Software engineer focused on AI, graphics, and interactive systems.",
@@ -44,7 +44,7 @@ export default function RootLayout({
       <body
         className={clsx(
           syne.variable,
-          spaceGrotesk.variable,
+          figtree.variable,
           "font-space-grotesk relative",
         )}
       >
