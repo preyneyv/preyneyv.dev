@@ -1,28 +1,26 @@
-'use client'
-import { LogoGithub, LogoLinkedin } from '@carbon/icons-react'
-import { useMotionValue, useSpring } from 'framer-motion'
-import Link from 'next/link'
-import { ReactNode, useEffect } from 'react'
-import { MotionImage } from '../custom-motion'
+"use client";
+import { LogoGithub, LogoLinkedin } from "@carbon/icons-react";
+import Link from "next/link";
+import { ReactNode } from "react";
 
 function FooterLink({
   href,
   external,
   children,
 }: {
-  href: string
-  external?: boolean
-  children?: ReactNode
+  href: string;
+  external?: boolean;
+  children?: ReactNode;
 }) {
   return (
     <Link
-      target={external ? '_blank' : undefined}
+      target={external ? "_blank" : undefined}
       href={href}
       className="text-neutral-400 hover:text-white transition-colors"
     >
       {children}
     </Link>
-  )
+  );
 }
 
 export default function Footer() {
@@ -46,7 +44,6 @@ export default function Footer() {
         </div>
         <div className="w-full flex text-xs justify-between text-neutral-400 pb-9 items-end">
           <div>
-            Designed and developed in 2024.{' '}
             <Link
               href="https://github.com/preyneyv/preyneyv.dev"
               className="border-b-grae border-b-[1px]"
@@ -74,5 +71,5 @@ export default function Footer() {
       </div>
       <div className="absolute left-0 bottom-9 w-screen border-t-[1px] border-dark" />
     </footer>
-  )
+  );
 }

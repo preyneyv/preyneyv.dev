@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
-import { MotionLink } from '@/components/custom-motion'
-import SectionTitle from '@/components/section-title'
-import { colors } from '@/constants'
-import { Launch, LogoGithub } from '@carbon/icons-react'
-import clsx from 'clsx'
-import { motion } from 'framer-motion'
+import { MotionLink } from "@/components/custom-motion";
+import SectionTitle from "@/components/section-title";
+import { colors } from "@/constants";
+import { Launch, LogoGithub } from "@carbon/icons-react";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 
-import data, { FeaturedProject } from '@/data/featured-projects'
-import Link from 'next/link'
-import ChevyButton from '@/ui/chevy-button'
-import { OverflowList } from 'react-overflow-list'
-import { useCanHover } from '@/hooks/media-queries'
+import data, { FeaturedProject } from "@/data/featured-projects";
+import { useCanHover } from "@/hooks/media-queries";
+import ChevyButton from "@/ui/chevy-button";
+import Link from "next/link";
+import { OverflowList } from "react-overflow-list";
 
 function StarburstSVG() {
-  const h = 160
-  const w = 16
+  const h = 160;
+  const w = 16;
   const pathProps = {
-    fill: 'none',
+    fill: "none",
     stroke: colors.dark,
     strokeWidth: 1,
-  }
+  };
   return (
     <svg
       className="absolute left-0 top-0 pointer-events-none -z-10"
       style={{
-        height: '10000px',
-        width: '100vw',
+        height: "10000px",
+        width: "100vw",
         transform: `translate(-100%, -100%) translate(0.5px, 22px)  translate(${w}px, ${h}px) rotate(180deg)`,
       }}
     >
@@ -51,24 +51,24 @@ function StarburstSVG() {
         />
       </g>
     </svg>
-  )
+  );
 }
 
 function ProjectCard({
   project,
   canHover,
 }: {
-  project: FeaturedProject
-  canHover: boolean
+  project: FeaturedProject;
+  canHover: boolean;
 }) {
   // TODO: replace this with project slug when project pages are complete.
-  const projectTarget = project.links[0].url
+  const projectTarget = project.links[0].url;
   return (
     <motion.div
       className="relative"
       initial="initial"
-      whileHover={canHover ? 'hover' : undefined}
-      animate={canHover ? undefined : 'hover'}
+      whileHover={canHover ? "hover" : undefined}
+      animate={canHover ? undefined : "hover"}
     >
       <MotionLink
         href={projectTarget}
@@ -78,7 +78,7 @@ function ProjectCard({
         <div className="relative flex-1 flex flex-col">
           <motion.div
             className={clsx(
-              'absolute border-dark left-0 top-0 origin-top-left w-full h-full pointer-events-none border-l-[1px]'
+              "absolute border-dark left-0 top-0 origin-top-left w-full h-full pointer-events-none border-l-[1px]",
             )}
           />
           <motion.div
@@ -87,11 +87,13 @@ function ProjectCard({
               hover: { transform: `scaleX(100%)` },
             }}
             className={clsx(
-              'absolute border-b-[1px] border-dark w-full bottom-0 origin-left pointer-events-none -z-10'
+              "absolute border-b-[1px] border-dark w-full bottom-0 origin-left pointer-events-none -z-10",
             )}
           />
           <header className="relative">
-            <h3 className="font-bold text-2xl leading-none">{project.name}</h3>
+            <h3 className="font-bold text-2xl leading-none mb-2">
+              {project.name}
+            </h3>
             <StarburstSVG />
             <div className="absolute right-0 bottom-0" />
           </header>
@@ -116,7 +118,7 @@ function ProjectCard({
           <motion.li
             key={link.type}
             variants={{
-              initial: { translateX: '-10%', opacity: 0 },
+              initial: { translateX: "-10%", opacity: 0 },
               hover: {
                 translateX: 0,
                 opacity: 1,
@@ -129,25 +131,25 @@ function ProjectCard({
               target="_blank"
               className="p-2 block text-neutral-600 hover:text-white transition-colors duration-300"
             >
-              {link.type === 'github' && <LogoGithub size={20} />}
-              {link.type === 'external' && <Launch size={20} />}
+              {link.type === "github" && <LogoGithub size={20} />}
+              {link.type === "external" && <Launch size={20} />}
             </MotionLink>
           </motion.li>
         ))}
       </motion.ul>
     </motion.div>
-  )
+  );
 }
 
 export default function FeaturedProjects() {
-  const canHover = useCanHover()
+  const canHover = useCanHover();
   return (
     <section>
       <header className="flex justify-between">
-        <Link href={'/projects'}>
+        <Link href={"/projects"}>
           <SectionTitle>Projects</SectionTitle>
         </Link>
-        <Link href={'/projects'}>
+        <Link href={"/projects"}>
           <ChevyButton>View More</ChevyButton>
         </Link>
       </header>
@@ -175,5 +177,5 @@ export default function FeaturedProjects() {
         </svg> */}
       </motion.div>
     </section>
-  )
+  );
 }

@@ -1,43 +1,23 @@
-import { ReactNode } from 'react'
+import type { Project } from "./projects";
 
-export type FeaturedProject = {
-  name: string
-  slug: string
-  description: ReactNode
-  tech: string[]
-  links: { type: 'external' | 'github'; url: string }[]
-}
+import arcaptcha from "./projects/arcaptcha";
+import usePrompt from "./projects/use-prompt";
+import yarralytics from "./projects/yarralytics";
 
-export default [
-  {
-    name: 'Yarralytics',
-    slug: 'yarralytics',
-    description: 'In-depth post-game performance analytics for Brawlhalla.',
-    tech: ['Next.js', 'Rust', 'Azure'],
-    links: [{ type: 'external', url: 'https://yarralytics.bh' }],
-  },
-  {
-    name: 'Telestrator',
-    slug: 'telestrator',
-    description: 'Freehand illustration tool for sports and esports analysts.',
-    tech: ['Rust', 'WebRTC', 'NVENC'],
-    links: [{ type: 'github', url: 'https://github.com/preyneyv/telestrator' }],
-  },
-  {
-    name: 'Client-Side HATEOAS',
-    slug: 'hateoas-but-client-side',
-    description:
-      'HTMX with a service worker "backend" handling requests, fully offline.',
-    tech: ['JavaScript', 'HTMX', 'Service Workers'],
-    links: [
-      {
-        type: 'external',
-        url: 'https://htmx-serviceworker-todo.vercel.app/',
-      },
-      {
-        type: 'github',
-        url: 'https://github.com/preyneyv/htmx-serviceworker-todo',
-      },
-    ],
-  },
-] satisfies FeaturedProject[]
+export type FeaturedProject = Pick<
+  Project,
+  "name" | "slug" | "description" | "tech" | "links"
+>;
+
+export default [arcaptcha, usePrompt, yarralytics].map(
+  ({ name, slug, tagline, tech, links }) => ({
+    name,
+    slug,
+    description: tagline,
+    tech,
+    links: links.filter(
+      (link): link is { type: "external" | "github"; url: string } =>
+        link.type === "external" || link.type === "github",
+    ),
+  }),
+) satisfies FeaturedProject[];

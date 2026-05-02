@@ -1,63 +1,67 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
 export type Experience = {
-  company: string
-  role: string
-  type: string
-  start: string
-  end: string
-  location: string
-  description: ReactNode
-  relatedProjects: {}[]
-}
+  company: string;
+  role: string;
+  type: string;
+  start: string;
+  end: string;
+  location: string;
+  description: ReactNode;
+  relatedProjects: object[];
+};
 
 export default [
   {
-    company: 'McKinsey Digital',
-    role: 'Senior Engineer I',
-    type: 'Full-Time',
-    start: 'Mar 2023',
-    end: 'Jun 2025',
-    location: 'Raliegh, NC',
+    company: "McKinsey Digital",
+    role: "Senior Software Engineer",
+    type: "Full-Time",
+    start: "Mar 2023",
+    end: "Jun 2025",
+    location: "Raleigh, NC",
     description: (
       <>
         <p>
-          At McKinsey Digital, I work across a wide array of technologies,
-          roles, and industries to deliver impactful solutions to my clients.
+          At McKinsey Digital, I worked across frontend, backend, cloud, and a
+          bit of ML to build internal tools for clients in manufacturing,
+          medtech, utilities, and payments. A lot of the work lived in messy
+          operational spaces, which made it a good mix of product thinking,
+          technical design, and hands-on implementation.
         </p>
         <p>
-          My work spans front-end, back-end, and cloud. I have architected and
-          implemented digital systems for supply chain optimization, payment
-          assistance, field service scheduling, and distributed automated
-          testing. A key component of my role is to coach client technologists
-          on best practices in software architecture and design, requiring
-          coordination across multidisciplinary teams.
+          The projects ranged from supply chain planning and field-service
+          scheduling to document processing and distributed test orchestration.
+          Depending on the project, I was usually somewhere between engineer,
+          tech lead, and product partner, bouncing between architecture,
+          implementation details, and client collaboration.
         </p>
       </>
     ),
     relatedProjects: [],
   },
   {
-    company: 'Brawlhalla Esports',
-    role: 'Software Developer, Part-Time',
-    type: 'Part-Time',
-    start: 'Oct 2021',
-    location: 'Atlanta, GA',
-    end: 'Feb 2023',
+    company: "Brawlhalla Esports",
+    role: "Software Developer, Part-Time",
+    type: "Part-Time",
+    start: "Oct 2021",
+    location: "Atlanta, GA",
+    end: "Feb 2023",
     description: (
       <>
         <p>
           While at Georgia Tech, I worked part-time for Brawlhalla Esports to
-          build internal and public-facing applications and experiences.
+          build internal tools and public-facing fan experiences for online and
+          in-person tournaments.
         </p>
         <p>
-          Most of my projects here were solo, having me go from requirements, to
-          design, to product independently. The majority of my work was focused
-          on enhancing the esports viewership experience for online and
-          in-person tournaments.
+          Most of the work was end-to-end and solo, taking projects from
+          requirements and product thinking through implementation. The output
+          ranged from real-time broadcast overlays and tournament operations
+          tooling to a redesign of brawlhalla.com and interactive viewer
+          extensions used during live events.
         </p>
       </>
     ),
     relatedProjects: [],
   },
-] satisfies Experience[]
+] satisfies Experience[];
