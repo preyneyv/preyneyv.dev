@@ -1,10 +1,9 @@
-'use client'
+"use client";
 
-import { AnimateHeight } from '@/components/animate-height'
-import { MotionImage, useIsInitialRender } from '@/components/custom-motion'
-import { Project } from '@/data/projects'
+import { AnimateHeight } from "@/components/animate-height";
+import { useIsInitialRender } from "@/components/custom-motion";
+import { Project } from "@/data/projects";
 import {
-  AnimatePresence,
   EventInfo,
   MotionConfig,
   MotionValue,
@@ -12,8 +11,8 @@ import {
   useMotionTemplate,
   useMotionValue,
   useSpring,
-} from 'framer-motion'
-import Image from 'next/image'
+} from "framer-motion";
+import Image from "next/image";
 import {
   ReactNode,
   createContext,
@@ -22,43 +21,47 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react'
-import { createPortal } from 'react-dom'
+} from "react";
+import { createPortal } from "react-dom";
 
 const PreviewImageContext = createContext<{
   updateProject: (
     project: Project,
     set: boolean,
-    left: number | undefined
-  ) => void
-} | null>(null)
+    left: number | undefined,
+  ) => void;
+} | null>(null);
 
 export function usePreviewImage(project: Project) {
-  const ctx = useContext(PreviewImageContext)
+  const ctx = useContext(PreviewImageContext);
   if (!ctx) {
-    throw new Error('usePreviewImage must be used within PreviewImageContext.')
+    throw new Error("usePreviewImage must be used within PreviewImageContext.");
   }
+  const { updateProject } = ctx;
+
   const onHoverStart = (event: PointerEvent, info: EventInfo) => {
-    ctx.updateProject(
+    void info;
+    updateProject(
       project,
       true,
-      (event.target as HTMLElement)?.getBoundingClientRect().left
-    )
-  }
+      (event.target as HTMLElement)?.getBoundingClientRect().left,
+    );
+  };
   const onHoverEnd = (event: PointerEvent, info: EventInfo) => {
-    ctx.updateProject(
+    void info;
+    updateProject(
       project,
       false,
-      (event.target as HTMLElement)?.getBoundingClientRect().left
-    )
-  }
+      (event.target as HTMLElement)?.getBoundingClientRect().left,
+    );
+  };
 
   useEffect(() => {
     // Remove this project from active, if it currently is active.
-    ctx.updateProject(project, false, undefined)
-  }, [])
+    updateProject(project, false, undefined);
+  }, [project, updateProject]);
 
-  return { onHoverStart, onHoverEnd }
+  return { onHoverStart, onHoverEnd };
 }
 
 function PreviewImage({
@@ -66,40 +69,40 @@ function PreviewImage({
   x,
   y,
 }: {
-  project: Project | null
-  x: MotionValue<number>
-  y: MotionValue<number>
+  project: Project | null;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
 }) {
-  const isInitial = useIsInitialRender()
+  const isInitial = useIsInitialRender();
 
   const springY = useSpring(y, {
     bounce: 0,
-  })
-  const motionTranslate = useMotionTemplate`translate(${x}px, ${springY}px) translate(-100%, -50%) translate(-44px, 0)`
+  });
+  const motionTranslate = useMotionTemplate`translate(${x}px, ${springY}px) translate(-100%, -50%) translate(-44px, 0)`;
 
-  const lastProject = useRef(rawProject)
-  const [haveImage, setHaveImage] = useState(!!rawProject?.previewImage)
-  const resetTimeout = useRef<any>()
+  const lastProject = useRef(rawProject);
+  const [haveImage, setHaveImage] = useState(!!rawProject?.previewImage);
+  const resetTimeout = useRef<ReturnType<typeof setTimeout> | undefined>();
   useEffect(() => {
-    clearTimeout(resetTimeout.current)
-    if (rawProject?.previewImage) lastProject.current = rawProject
+    clearTimeout(resetTimeout.current);
+    if (rawProject?.previewImage) lastProject.current = rawProject;
     if (rawProject?.previewImage) {
-      setHaveImage(true)
+      setHaveImage(true);
     } else {
       resetTimeout.current = setTimeout(() => {
-        setHaveImage(false)
-      }, 150)
+        setHaveImage(false);
+      }, 150);
     }
     return () => {
-      clearTimeout(resetTimeout.current)
-    }
-  }, [rawProject])
+      clearTimeout(resetTimeout.current);
+    };
+  }, [rawProject]);
 
-  const project = rawProject?.previewImage ? rawProject : lastProject.current
-  if (!project) return
+  const project = rawProject?.previewImage ? rawProject : lastProject.current;
+  if (!project) return null;
 
   return createPortal(
-    <MotionConfig transition={{ type: 'tween' }}>
+    <MotionConfig transition={{ type: "tween" }}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
@@ -112,36 +115,36 @@ function PreviewImage({
         <motion.div
           className="fixed z-50 pointer-events-none left-0 top-0 flex flex-col items-center"
           style={{
-            width: '23vw',
-            maxWidth: '480px',
-            minWidth: '290px',
+            width: "23vw",
+            maxWidth: "480px",
+            minWidth: "290px",
             transform: motionTranslate,
           }}
           initial="hide"
-          animate={haveImage ? 'show' : 'hide'}
+          animate={haveImage ? "show" : "hide"}
         >
           <motion.div
             className="border-b-[1px] border-grae absolute origin-right"
-            style={{ width: 'calc(100% + 0.5em)', bottom: 0, right: `-0.5em` }}
+            style={{ width: "calc(100% + 0.5em)", bottom: 0, right: `-0.5em` }}
             variants={{
               hide: { scaleX: 0 },
-              show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
+              show: { scaleX: 1, transition: { delay: 0.3, type: "tween" } },
             }}
           />
           <motion.div
             className="border-r-[1px] border-grae absolute origin-center"
-            style={{ height: 'calc(100% + 1em)', bottom: `-0.5em`, right: 0 }}
+            style={{ height: "calc(100% + 1em)", bottom: `-0.5em`, right: 0 }}
             variants={{
-              hide: { scaleY: 0, transition: { delay: 0.3, type: 'tween' } },
+              hide: { scaleY: 0, transition: { delay: 0.3, type: "tween" } },
               show: { scaleY: 1 },
             }}
           />
           <motion.div
             className="border-t-[1px] border-grae absolute origin-right"
-            style={{ width: 'calc(100% + 0.5em)', top: 0, right: `-0.5em` }}
+            style={{ width: "calc(100% + 0.5em)", top: 0, right: `-0.5em` }}
             variants={{
               hide: { scaleX: 0 },
-              show: { scaleX: 1, transition: { delay: 0.3, type: 'tween' } },
+              show: { scaleX: 1, transition: { delay: 0.3, type: "tween" } },
             }}
           />
           <motion.div
@@ -172,14 +175,14 @@ function PreviewImage({
                   show: { opacity: 1, transition: { delay: 0.5 } },
                 }}
               >
-                {project.previewImage?.type === 'image' && (
+                {project.previewImage?.type === "image" && (
                   <Image
                     className="w-full"
                     src={project.previewImage!.src}
                     alt={project.name}
                   />
                 )}
-                {project.previewImage?.type === 'video' && (
+                {project.previewImage?.type === "video" && (
                   <video
                     className="w-full"
                     controls={false}
@@ -197,50 +200,53 @@ function PreviewImage({
         </motion.div>
       </motion.div>
     </MotionConfig>,
-    document.body
-  )
+    document.body,
+  );
 }
 
 function PreviewImageGuard({
   project,
   x,
 }: {
-  project: Project | null
-  x: MotionValue<number>
+  project: Project | null;
+  x: MotionValue<number>;
 }) {
-  const [canRender, setCanRender] = useState(false)
-  const y = useMotionValue(0)
+  const [canRender, setCanRender] = useState(false);
+  const y = useMotionValue(0);
+
   useEffect(() => {
     const listener = (e: MouseEvent) => {
-      y.set(e.clientY)
-      if (!canRender) setCanRender(true)
-    }
-    document.addEventListener('mousemove', listener, { passive: true })
+      y.set(e.clientY);
+      setCanRender(true);
+    };
+    document.addEventListener("mousemove", listener, { passive: true });
     return () => {
-      document.removeEventListener('mousemove', listener)
-    }
-  }, [canRender])
+      document.removeEventListener("mousemove", listener);
+    };
+  }, [y]);
 
-  if (!canRender) return null
-  return <PreviewImage project={project} x={x} y={y} />
+  if (!canRender) return null;
+  return <PreviewImage project={project} x={x} y={y} />;
 }
 
 export default function PreviewImageProvider({
   children,
 }: {
-  children: ReactNode
+  children: ReactNode;
 }) {
-  const [activeProject, setActiveProject] = useState<null | Project>(null)
-  const x = useMotionValue(0)
+  const [activeProject, setActiveProject] = useState<null | Project>(null);
+  const x = useMotionValue(0);
 
   const updateProject = useCallback(
     (project: Project, set: boolean, left: number | undefined) => {
-      if (set) setActiveProject(project)
-      else setActiveProject(null)
-      left !== undefined && x.set(left)
+      if (set) setActiveProject(project);
+      else setActiveProject(null);
+      if (left !== undefined) {
+        x.set(left);
+      }
     },
-    [setActiveProject]
-  )
+    [x],
+  );
 
   return (
     <div className="relative">
@@ -249,5 +255,5 @@ export default function PreviewImageProvider({
       </PreviewImageContext.Provider>
       <PreviewImageGuard project={activeProject} x={x} />
     </div>
-  )
+  );
 }

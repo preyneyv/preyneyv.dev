@@ -176,10 +176,10 @@ export default function Education() {
               Master of Engineering in Computer Science
             </h3>
           </div>
-          <div className="flex text-xs uppercase font-bold leading-none items-center gap-2 mt-1 flex-wrap">
+          <div className="flex text-xs uppercase font-bold leading-none items-center gap-2 mt-1.5 flex-wrap">
             <h3 className="text-bloo">Aug 2025 &mdash; May 2026</h3>
             <span className="text-grae">⁄</span>
-            <span>Fung Excellence Scholar</span>
+            <span className="text-bloo">Fung Excellence Scholar</span>
           </div>
           <h4 className="uppercase font-semibold text-xs flex gap-2 mt-4 flex-wrap">
             Visual Computing
@@ -200,10 +200,10 @@ export default function Education() {
               Bachelor of Science in Computer Science
             </h3>
           </div>
-          <div className="flex text-xs uppercase font-bold leading-none items-center gap-2 flex-wrap">
+          <div className="flex text-xs uppercase font-bold leading-none items-center gap-2 mt-1.5 flex-wrap">
             <h3 className="text-bloo">Aug 2020 &mdash; Dec 2022</h3>
             <span className="text-grae">⁄</span>
-            <span>Highest Honors</span>
+            <span className="text-bloo">Highest Honors</span>
           </div>
           <h4 className="uppercase font-semibold text-xs flex gap-2 mt-4">
             Intelligence

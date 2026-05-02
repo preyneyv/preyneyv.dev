@@ -4,13 +4,11 @@ import { MotionLink, useIsInitialRender } from "@/components/custom-motion";
 import { colors } from "@/constants";
 import { Project } from "@/data/projects";
 import { useCanHover } from "@/hooks/media-queries";
-import IconButton from "@/ui/icon-button";
 import {
   Catalog,
   Launch,
   LogoGithub,
   OverflowMenuHorizontal,
-  Search,
   Video,
 } from "@carbon/icons-react";
 import clsx from "clsx";
@@ -144,7 +142,7 @@ function ProjectListItem({
           </header>
           {project.for && (
             <h4 className="text-xs uppercase tracking-wider font-bold text-neutral-500">
-              <span className="text-grae mr-1">///</span>
+              <span className="text-grae mr-1">{"///"}</span>
               {project.for}
             </h4>
           )}
@@ -208,47 +206,6 @@ function ProjectListItem({
         </motion.ul>
       </motion.div>
     </motion.div>
-  );
-}
-
-// TODO: implement project search
-function ProjectSearch() {
-  const isInitial = useIsInitialRender();
-  return (
-    <motion.header
-      className="flex mb-8 bg-black"
-      initial={{
-        opacity: 0,
-        clipPath: `polygon(
-          calc(100% + 5rem) 0,
-          calc(100% + 5rem) 0,
-          100% 5rem,
-          100% 5rem
-        )`,
-      }}
-      animate={{
-        opacity: 1,
-        clipPath: `polygon(
-        0 0,
-        calc(100% + 5rem) 0,
-        100% 5rem,
-        -5rem 5rem
-      )`,
-      }}
-      transition={{
-        duration: 0.7,
-        delay: isInitial ? 1 : 0.5,
-      }}
-    >
-      <input
-        type="search"
-        className="w-full bg-transparent font-space-grotesk border-y-[1px] border-dark text-2xl outline-none font-semibold placeholder:text-grae"
-        placeholder="Search Projects"
-      />
-      <IconButton className="aspect-square w-20 border-[1px] border-dark">
-        <Search size={28} />
-      </IconButton>
-    </motion.header>
   );
 }
 

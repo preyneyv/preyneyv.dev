@@ -35,7 +35,7 @@ function Selector({
       x: -offset,
     });
     lastIdx.current = index;
-  }, [index, ref]);
+  }, [animationControls, index]);
 
   return (
     <motion.div

@@ -145,7 +145,7 @@ function NavLink({
         >
           {children}
           <span className="text-grae absolute -right-1 top-0 translate-x-full block">
-            {/* ⁄⁄ */}///
+            {"///"}
           </span>
         </motion.div>
       </MotionLink>
